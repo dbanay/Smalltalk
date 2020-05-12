@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "9589C68C246B46E4002F0390"
+               BlueprintIdentifier = "95B15FC5246B5F9D0014BC0C"
                BuildableName = "Smalltalk"
                BlueprintName = "Smalltalk"
                ReferencedContainer = "container:Smalltalk.xcodeproj">
@@ -44,7 +44,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9589C68C246B46E4002F0390"
+            BlueprintIdentifier = "95B15FC5246B5F9D0014BC0C"
             BuildableName = "Smalltalk"
             BlueprintName = "Smalltalk"
             ReferencedContainer = "container:Smalltalk.xcodeproj">
@@ -56,7 +56,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "${PROJECT_DIR}/../../files"
+            argument = "$(PROJECT_DIR)/../../files"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
@@ -71,7 +71,7 @@
          runnableDebuggingMode = "0">
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "9589C68C246B46E4002F0390"
+            BlueprintIdentifier = "95B15FC5246B5F9D0014BC0C"
             BuildableName = "Smalltalk"
             BlueprintName = "Smalltalk"
             ReferencedContainer = "container:Smalltalk.xcodeproj">

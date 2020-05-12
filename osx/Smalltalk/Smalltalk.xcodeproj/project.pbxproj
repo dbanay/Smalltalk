@@ -7,16 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9589C6A4246B474F002F0390 /* objmemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9589C699246B474E002F0390 /* objmemory.cpp */; };
-		9589C6A5246B474F002F0390 /* bitblt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9589C69A246B474E002F0390 /* bitblt.cpp */; };
-		9589C6A6246B474F002F0390 /* interpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9589C69C246B474E002F0390 /* interpreter.cpp */; };
-		9589C6A7246B474F002F0390 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 9589C69D246B474E002F0390 /* main.cpp */; };
-		9589C6AC246B4864002F0390 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9589C6AB246B4864002F0390 /* SDL2.framework */; };
-		9589C6AD246B4865002F0390 /* SDL2.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 9589C6AB246B4864002F0390 /* SDL2.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		95B15FDC246B5FC00014BC0C /* objmemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD2246B5FC00014BC0C /* objmemory.cpp */; };
+		95B15FDD246B5FC00014BC0C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD4246B5FC00014BC0C /* main.cpp */; };
+		95B15FDE246B5FC00014BC0C /* interpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD5246B5FC00014BC0C /* interpreter.cpp */; };
+		95B15FDF246B5FC00014BC0C /* bitblt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD8246B5FC00014BC0C /* bitblt.cpp */; };
+		95B15FE2246B5FD70014BC0C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B15FE1246B5FD70014BC0C /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
-		9589C68B246B46E4002F0390 /* CopyFiles */ = {
+		95B15FC4246B5F9D0014BC0C /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
 			buildActionMask = 2147483647;
 			dstPath = /usr/share/man/man1/;
@@ -25,82 +24,77 @@
 			);
 			runOnlyForDeploymentPostprocessing = 1;
 		};
-		9589C6AE246B4865002F0390 /* Embed Frameworks */ = {
-			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = "";
-			dstSubfolderSpec = 10;
-			files = (
-				9589C6AD246B4865002F0390 /* SDL2.framework in Embed Frameworks */,
-			);
-			name = "Embed Frameworks";
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9589C68D246B46E4002F0390 /* Smalltalk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Smalltalk; sourceTree = BUILT_PRODUCTS_DIR; };
-		9589C697246B474E002F0390 /* oops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = oops.h; path = ../../src/oops.h; sourceTree = "<group>"; };
-		9589C698246B474E002F0390 /* filesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filesystem.h; path = ../../src/filesystem.h; sourceTree = "<group>"; };
-		9589C699246B474E002F0390 /* objmemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objmemory.cpp; path = ../../src/objmemory.cpp; sourceTree = "<group>"; };
-		9589C69A246B474E002F0390 /* bitblt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bitblt.cpp; path = ../../src/bitblt.cpp; sourceTree = "<group>"; };
-		9589C69B246B474E002F0390 /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hal.h; path = ../../src/hal.h; sourceTree = "<group>"; };
-		9589C69C246B474E002F0390 /* interpreter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interpreter.cpp; path = ../../src/interpreter.cpp; sourceTree = "<group>"; };
-		9589C69D246B474E002F0390 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/main.cpp; sourceTree = "<group>"; };
-		9589C69E246B474E002F0390 /* bitblt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitblt.h; path = ../../src/bitblt.h; sourceTree = "<group>"; };
-		9589C6A0246B474E002F0390 /* posixfilesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = posixfilesystem.h; path = ../../src/posixfilesystem.h; sourceTree = "<group>"; };
-		9589C6A1246B474F002F0390 /* interpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interpreter.h; path = ../../src/interpreter.h; sourceTree = "<group>"; };
-		9589C6A2246B474F002F0390 /* realwordmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = realwordmemory.h; path = ../../src/realwordmemory.h; sourceTree = "<group>"; };
-		9589C6A3246B474F002F0390 /* objmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objmemory.h; path = ../../src/objmemory.h; sourceTree = "<group>"; };
-		9589C6AA246B484D002F0390 /* Library */ = {isa = PBXFileReference; lastKnownFileType = folder; name = Library; path = ../../../../../../Library; sourceTree = "<group>"; };
-		9589C6AB246B4864002F0390 /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		95B15FC6246B5F9D0014BC0C /* Smalltalk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Smalltalk; sourceTree = BUILT_PRODUCTS_DIR; };
+		95B15FD0246B5FC00014BC0C /* interpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interpreter.h; path = ../../../src/interpreter.h; sourceTree = "<group>"; };
+		95B15FD1246B5FC00014BC0C /* filesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filesystem.h; path = ../../../src/filesystem.h; sourceTree = "<group>"; };
+		95B15FD2246B5FC00014BC0C /* objmemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objmemory.cpp; path = ../../../src/objmemory.cpp; sourceTree = "<group>"; };
+		95B15FD3246B5FC00014BC0C /* oops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = oops.h; path = ../../../src/oops.h; sourceTree = "<group>"; };
+		95B15FD4246B5FC00014BC0C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../src/main.cpp; sourceTree = "<group>"; };
+		95B15FD5246B5FC00014BC0C /* interpreter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interpreter.cpp; path = ../../../src/interpreter.cpp; sourceTree = "<group>"; };
+		95B15FD6246B5FC00014BC0C /* bitblt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitblt.h; path = ../../../src/bitblt.h; sourceTree = "<group>"; };
+		95B15FD7246B5FC00014BC0C /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hal.h; path = ../../../src/hal.h; sourceTree = "<group>"; };
+		95B15FD8246B5FC00014BC0C /* bitblt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bitblt.cpp; path = ../../../src/bitblt.cpp; sourceTree = "<group>"; };
+		95B15FD9246B5FC00014BC0C /* objmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objmemory.h; path = ../../../src/objmemory.h; sourceTree = "<group>"; };
+		95B15FDA246B5FC00014BC0C /* posixfilesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = posixfilesystem.h; path = ../../../src/posixfilesystem.h; sourceTree = "<group>"; };
+		95B15FDB246B5FC00014BC0C /* realwordmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = realwordmemory.h; path = ../../../src/realwordmemory.h; sourceTree = "<group>"; };
+		95B15FE1246B5FD70014BC0C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		9589C68A246B46E4002F0390 /* Frameworks */ = {
+		95B15FC3246B5F9D0014BC0C /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9589C6AC246B4864002F0390 /* SDL2.framework in Frameworks */,
+				95B15FE2246B5FD70014BC0C /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		9589C684246B46E4002F0390 = {
+		95B15FBD246B5F9D0014BC0C = {
 			isa = PBXGroup;
 			children = (
-				9589C69A246B474E002F0390 /* bitblt.cpp */,
-				9589C69E246B474E002F0390 /* bitblt.h */,
-				9589C698246B474E002F0390 /* filesystem.h */,
-				9589C69B246B474E002F0390 /* hal.h */,
-				9589C69C246B474E002F0390 /* interpreter.cpp */,
-				9589C6A1246B474F002F0390 /* interpreter.h */,
-				9589C69D246B474E002F0390 /* main.cpp */,
-				9589C699246B474E002F0390 /* objmemory.cpp */,
-				9589C6A3246B474F002F0390 /* objmemory.h */,
-				9589C697246B474E002F0390 /* oops.h */,
-				9589C6A0246B474E002F0390 /* posixfilesystem.h */,
-				9589C6A2246B474F002F0390 /* realwordmemory.h */,
-				9589C68E246B46E4002F0390 /* Products */,
-				9589C6A9246B484D002F0390 /* Frameworks */,
+				95B15FC8246B5F9D0014BC0C /* Smalltalk */,
+				95B15FC7246B5F9D0014BC0C /* Products */,
+				95B15FE0246B5FD60014BC0C /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
-		9589C68E246B46E4002F0390 /* Products */ = {
+		95B15FC7246B5F9D0014BC0C /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9589C68D246B46E4002F0390 /* Smalltalk */,
+				95B15FC6246B5F9D0014BC0C /* Smalltalk */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		9589C6A9246B484D002F0390 /* Frameworks */ = {
+		95B15FC8246B5F9D0014BC0C /* Smalltalk */ = {
 			isa = PBXGroup;
 			children = (
-				9589C6AB246B4864002F0390 /* SDL2.framework */,
-				9589C6AA246B484D002F0390 /* Library */,
+				95B15FD8246B5FC00014BC0C /* bitblt.cpp */,
+				95B15FD6246B5FC00014BC0C /* bitblt.h */,
+				95B15FD1246B5FC00014BC0C /* filesystem.h */,
+				95B15FD7246B5FC00014BC0C /* hal.h */,
+				95B15FD5246B5FC00014BC0C /* interpreter.cpp */,
+				95B15FD0246B5FC00014BC0C /* interpreter.h */,
+				95B15FD4246B5FC00014BC0C /* main.cpp */,
+				95B15FD2246B5FC00014BC0C /* objmemory.cpp */,
+				95B15FD9246B5FC00014BC0C /* objmemory.h */,
+				95B15FD3246B5FC00014BC0C /* oops.h */,
+				95B15FDA246B5FC00014BC0C /* posixfilesystem.h */,
+				95B15FDB246B5FC00014BC0C /* realwordmemory.h */,
+			);
+			path = Smalltalk;
+			sourceTree = "<group>";
+		};
+		95B15FE0246B5FD60014BC0C /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				95B15FE1246B5FD70014BC0C /* SDL2.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -108,14 +102,13 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9589C68C246B46E4002F0390 /* Smalltalk */ = {
+		95B15FC5246B5F9D0014BC0C /* Smalltalk */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9589C694246B46E4002F0390 /* Build configuration list for PBXNativeTarget "Smalltalk" */;
+			buildConfigurationList = 95B15FCD246B5F9D0014BC0C /* Build configuration list for PBXNativeTarget "Smalltalk" */;
 			buildPhases = (
-				9589C689246B46E4002F0390 /* Sources */,
-				9589C68A246B46E4002F0390 /* Frameworks */,
-				9589C68B246B46E4002F0390 /* CopyFiles */,
-				9589C6AE246B4865002F0390 /* Embed Frameworks */,
+				95B15FC2246B5F9D0014BC0C /* Sources */,
+				95B15FC3246B5F9D0014BC0C /* Frameworks */,
+				95B15FC4246B5F9D0014BC0C /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -123,24 +116,24 @@
 			);
 			name = Smalltalk;
 			productName = Smalltalk;
-			productReference = 9589C68D246B46E4002F0390 /* Smalltalk */;
+			productReference = 95B15FC6246B5F9D0014BC0C /* Smalltalk */;
 			productType = "com.apple.product-type.tool";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		9589C685246B46E4002F0390 /* Project object */ = {
+		95B15FBE246B5F9D0014BC0C /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
 				LastUpgradeCheck = 1140;
 				ORGANIZATIONNAME = "Dan Banay";
 				TargetAttributes = {
-					9589C68C246B46E4002F0390 = {
+					95B15FC5246B5F9D0014BC0C = {
 						CreatedOnToolsVersion = 11.4.1;
 					};
 				};
 			};
-			buildConfigurationList = 9589C688246B46E4002F0390 /* Build configuration list for PBXProject "Smalltalk" */;
+			buildConfigurationList = 95B15FC1246B5F9D0014BC0C /* Build configuration list for PBXProject "Smalltalk" */;
 			compatibilityVersion = "Xcode 9.3";
 			developmentRegion = en;
 			hasScannedForEncodings = 0;
@@ -148,32 +141,32 @@
 				en,
 				Base,
 			);
-			mainGroup = 9589C684246B46E4002F0390;
-			productRefGroup = 9589C68E246B46E4002F0390 /* Products */;
+			mainGroup = 95B15FBD246B5F9D0014BC0C;
+			productRefGroup = 95B15FC7246B5F9D0014BC0C /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9589C68C246B46E4002F0390 /* Smalltalk */,
+				95B15FC5246B5F9D0014BC0C /* Smalltalk */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
-		9589C689246B46E4002F0390 /* Sources */ = {
+		95B15FC2246B5F9D0014BC0C /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				9589C6A5246B474F002F0390 /* bitblt.cpp in Sources */,
-				9589C6A4246B474F002F0390 /* objmemory.cpp in Sources */,
-				9589C6A7246B474F002F0390 /* main.cpp in Sources */,
-				9589C6A6246B474F002F0390 /* interpreter.cpp in Sources */,
+				95B15FDF246B5FC00014BC0C /* bitblt.cpp in Sources */,
+				95B15FDD246B5FC00014BC0C /* main.cpp in Sources */,
+				95B15FDC246B5FC00014BC0C /* objmemory.cpp in Sources */,
+				95B15FDE246B5FC00014BC0C /* interpreter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin XCBuildConfiguration section */
-		9589C692246B46E4002F0390 /* Debug */ = {
+		95B15FCB246B5F9D0014BC0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -231,7 +224,7 @@
 			};
 			name = Debug;
 		};
-		9589C693246B46E4002F0390 /* Release */ = {
+		95B15FCC246B5F9D0014BC0C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -282,7 +275,7 @@
 			};
 			name = Release;
 		};
-		9589C695246B46E4002F0390 /* Debug */ = {
+		95B15FCE246B5F9D0014BC0C /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -294,7 +287,7 @@
 			};
 			name = Debug;
 		};
-		9589C696246B46E4002F0390 /* Release */ = {
+		95B15FCF246B5F9D0014BC0C /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				CODE_SIGN_STYLE = Automatic;
@@ -309,25 +302,25 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9589C688246B46E4002F0390 /* Build configuration list for PBXProject "Smalltalk" */ = {
+		95B15FC1246B5F9D0014BC0C /* Build configuration list for PBXProject "Smalltalk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9589C692246B46E4002F0390 /* Debug */,
-				9589C693246B46E4002F0390 /* Release */,
+				95B15FCB246B5F9D0014BC0C /* Debug */,
+				95B15FCC246B5F9D0014BC0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9589C694246B46E4002F0390 /* Build configuration list for PBXNativeTarget "Smalltalk" */ = {
+		95B15FCD246B5F9D0014BC0C /* Build configuration list for PBXNativeTarget "Smalltalk" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				9589C695246B46E4002F0390 /* Debug */,
-				9589C696246B46E4002F0390 /* Release */,
+				95B15FCE246B5F9D0014BC0C /* Debug */,
+				95B15FCF246B5F9D0014BC0C /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 9589C685246B46E4002F0390 /* Project object */;
+	rootObject = 95B15FBE246B5F9D0014BC0C /* Project object */;
 }
