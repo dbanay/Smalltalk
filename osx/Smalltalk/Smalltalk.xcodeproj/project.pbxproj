@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		953CC34A246B6579001B3AC8 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B15FE1246B5FD70014BC0C /* SDL2.framework */; };
 		95B15FDC246B5FC00014BC0C /* objmemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD2246B5FC00014BC0C /* objmemory.cpp */; };
 		95B15FDD246B5FC00014BC0C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD4246B5FC00014BC0C /* main.cpp */; };
 		95B15FDE246B5FC00014BC0C /* interpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD5246B5FC00014BC0C /* interpreter.cpp */; };
 		95B15FDF246B5FC00014BC0C /* bitblt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD8246B5FC00014BC0C /* bitblt.cpp */; };
-		95B15FE2246B5FD70014BC0C /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B15FE1246B5FD70014BC0C /* SDL2.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -40,7 +40,7 @@
 		95B15FD9246B5FC00014BC0C /* objmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objmemory.h; path = ../../../src/objmemory.h; sourceTree = "<group>"; };
 		95B15FDA246B5FC00014BC0C /* posixfilesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = posixfilesystem.h; path = ../../../src/posixfilesystem.h; sourceTree = "<group>"; };
 		95B15FDB246B5FC00014BC0C /* realwordmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = realwordmemory.h; path = ../../../src/realwordmemory.h; sourceTree = "<group>"; };
-		95B15FE1246B5FD70014BC0C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = ../../../../../../Library/Frameworks/SDL2.framework; sourceTree = "<group>"; };
+		95B15FE1246B5FD70014BC0C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -48,7 +48,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95B15FE2246B5FD70014BC0C /* SDL2.framework in Frameworks */,
+				953CC34A246B6579001B3AC8 /* SDL2.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
