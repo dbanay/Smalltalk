@@ -56,7 +56,7 @@
             isEnabled = "YES">
          </CommandLineArgument>
          <CommandLineArgument
-            argument = "$(PROJECT_DIR)/../../files"
+            argument = "$(PROJECT_DIR)/../files"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>
