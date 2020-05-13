@@ -12,7 +12,12 @@
 #include <cassert>
 #include <stdlib.h>
 #include <time.h>
+#ifdef _WIN32
+#define SDL_MAIN_HANDLED
+#include "SDL.h"
+#else
 #include "SDL2/SDL.h"
+#endif
 #include "interpreter.h"
 #include "posixfilesystem.h"
 #include "hal.h"

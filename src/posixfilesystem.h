@@ -12,7 +12,7 @@
 #include <fcntl.h>
 #include <cassert>
 
-#ifndef WIN32
+#ifndef _WIN32
 #include <unistd.h>
 #include <dirent.h>
 #include <errno.h>

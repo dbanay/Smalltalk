@@ -740,7 +740,7 @@ private:
     // Special Register G&R pg. 667
     int currentSegment; // The index of the heap segment currently being used for allocation
 
-    std::uint32_t freeWords; // free words remaining (make primitiveFreeCore "fast")
+    int freeWords; // free words remaining (make primitiveFreeCore "fast")
     // An a table entry with a free bit set OR that contains a reference to a free chunk
     // (free bit clear but count field zero) of memory is counted as a free oop
     int freeOops;  // free OT entries (make primtiveFreeOops "fast")

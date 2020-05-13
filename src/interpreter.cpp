@@ -3643,7 +3643,7 @@ void Interpreter::primitiveAsFloat()
     int integerArgument = popInteger();
     if (success())
     {
-        pushFloat(integerArgument);
+        pushFloat((float) integerArgument);
     }
     else
         unPop(1);
