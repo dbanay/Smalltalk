@@ -8,10 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		953CC34A246B6579001B3AC8 /* SDL2.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95B15FE1246B5FD70014BC0C /* SDL2.framework */; };
-		95B15FDC246B5FC00014BC0C /* objmemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD2246B5FC00014BC0C /* objmemory.cpp */; };
-		95B15FDD246B5FC00014BC0C /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD4246B5FC00014BC0C /* main.cpp */; };
-		95B15FDE246B5FC00014BC0C /* interpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD5246B5FC00014BC0C /* interpreter.cpp */; };
-		95B15FDF246B5FC00014BC0C /* bitblt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 95B15FD8246B5FC00014BC0C /* bitblt.cpp */; };
+		953CC359246B8834001B3AC8 /* interpreter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 953CC34D246B8834001B3AC8 /* interpreter.cpp */; };
+		953CC35A246B8834001B3AC8 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 953CC350246B8834001B3AC8 /* main.cpp */; };
+		953CC35B246B8834001B3AC8 /* objmemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 953CC351246B8834001B3AC8 /* objmemory.cpp */; };
+		953CC35C246B8834001B3AC8 /* bitblt.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 953CC356246B8834001B3AC8 /* bitblt.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -27,19 +27,19 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		953CC34D246B8834001B3AC8 /* interpreter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interpreter.cpp; path = ../../src/interpreter.cpp; sourceTree = "<group>"; };
+		953CC34E246B8834001B3AC8 /* oops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = oops.h; path = ../../src/oops.h; sourceTree = "<group>"; };
+		953CC34F246B8834001B3AC8 /* interpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interpreter.h; path = ../../src/interpreter.h; sourceTree = "<group>"; };
+		953CC350246B8834001B3AC8 /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../src/main.cpp; sourceTree = "<group>"; };
+		953CC351246B8834001B3AC8 /* objmemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objmemory.cpp; path = ../../src/objmemory.cpp; sourceTree = "<group>"; };
+		953CC352246B8834001B3AC8 /* posixfilesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = posixfilesystem.h; path = ../../src/posixfilesystem.h; sourceTree = "<group>"; };
+		953CC353246B8834001B3AC8 /* realwordmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = realwordmemory.h; path = ../../src/realwordmemory.h; sourceTree = "<group>"; };
+		953CC354246B8834001B3AC8 /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hal.h; path = ../../src/hal.h; sourceTree = "<group>"; };
+		953CC355246B8834001B3AC8 /* filesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filesystem.h; path = ../../src/filesystem.h; sourceTree = "<group>"; };
+		953CC356246B8834001B3AC8 /* bitblt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bitblt.cpp; path = ../../src/bitblt.cpp; sourceTree = "<group>"; };
+		953CC357246B8834001B3AC8 /* bitblt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitblt.h; path = ../../src/bitblt.h; sourceTree = "<group>"; };
+		953CC358246B8834001B3AC8 /* objmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objmemory.h; path = ../../src/objmemory.h; sourceTree = "<group>"; };
 		95B15FC6246B5F9D0014BC0C /* Smalltalk */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Smalltalk; sourceTree = BUILT_PRODUCTS_DIR; };
-		95B15FD0246B5FC00014BC0C /* interpreter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = interpreter.h; path = ../../../src/interpreter.h; sourceTree = "<group>"; };
-		95B15FD1246B5FC00014BC0C /* filesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = filesystem.h; path = ../../../src/filesystem.h; sourceTree = "<group>"; };
-		95B15FD2246B5FC00014BC0C /* objmemory.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = objmemory.cpp; path = ../../../src/objmemory.cpp; sourceTree = "<group>"; };
-		95B15FD3246B5FC00014BC0C /* oops.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = oops.h; path = ../../../src/oops.h; sourceTree = "<group>"; };
-		95B15FD4246B5FC00014BC0C /* main.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = main.cpp; path = ../../../src/main.cpp; sourceTree = "<group>"; };
-		95B15FD5246B5FC00014BC0C /* interpreter.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = interpreter.cpp; path = ../../../src/interpreter.cpp; sourceTree = "<group>"; };
-		95B15FD6246B5FC00014BC0C /* bitblt.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = bitblt.h; path = ../../../src/bitblt.h; sourceTree = "<group>"; };
-		95B15FD7246B5FC00014BC0C /* hal.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = hal.h; path = ../../../src/hal.h; sourceTree = "<group>"; };
-		95B15FD8246B5FC00014BC0C /* bitblt.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; name = bitblt.cpp; path = ../../../src/bitblt.cpp; sourceTree = "<group>"; };
-		95B15FD9246B5FC00014BC0C /* objmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = objmemory.h; path = ../../../src/objmemory.h; sourceTree = "<group>"; };
-		95B15FDA246B5FC00014BC0C /* posixfilesystem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = posixfilesystem.h; path = ../../../src/posixfilesystem.h; sourceTree = "<group>"; };
-		95B15FDB246B5FC00014BC0C /* realwordmemory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = realwordmemory.h; path = ../../../src/realwordmemory.h; sourceTree = "<group>"; };
 		95B15FE1246B5FD70014BC0C /* SDL2.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SDL2.framework; path = /Library/Frameworks/SDL2.framework; sourceTree = "<absolute>"; };
 /* End PBXFileReference section */
 
@@ -58,7 +58,18 @@
 		95B15FBD246B5F9D0014BC0C = {
 			isa = PBXGroup;
 			children = (
-				95B15FC8246B5F9D0014BC0C /* Smalltalk */,
+				953CC356246B8834001B3AC8 /* bitblt.cpp */,
+				953CC357246B8834001B3AC8 /* bitblt.h */,
+				953CC355246B8834001B3AC8 /* filesystem.h */,
+				953CC354246B8834001B3AC8 /* hal.h */,
+				953CC34D246B8834001B3AC8 /* interpreter.cpp */,
+				953CC34F246B8834001B3AC8 /* interpreter.h */,
+				953CC350246B8834001B3AC8 /* main.cpp */,
+				953CC351246B8834001B3AC8 /* objmemory.cpp */,
+				953CC358246B8834001B3AC8 /* objmemory.h */,
+				953CC34E246B8834001B3AC8 /* oops.h */,
+				953CC352246B8834001B3AC8 /* posixfilesystem.h */,
+				953CC353246B8834001B3AC8 /* realwordmemory.h */,
 				95B15FC7246B5F9D0014BC0C /* Products */,
 				95B15FE0246B5FD60014BC0C /* Frameworks */,
 			);
@@ -70,25 +81,6 @@
 				95B15FC6246B5F9D0014BC0C /* Smalltalk */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		95B15FC8246B5F9D0014BC0C /* Smalltalk */ = {
-			isa = PBXGroup;
-			children = (
-				95B15FD8246B5FC00014BC0C /* bitblt.cpp */,
-				95B15FD6246B5FC00014BC0C /* bitblt.h */,
-				95B15FD1246B5FC00014BC0C /* filesystem.h */,
-				95B15FD7246B5FC00014BC0C /* hal.h */,
-				95B15FD5246B5FC00014BC0C /* interpreter.cpp */,
-				95B15FD0246B5FC00014BC0C /* interpreter.h */,
-				95B15FD4246B5FC00014BC0C /* main.cpp */,
-				95B15FD2246B5FC00014BC0C /* objmemory.cpp */,
-				95B15FD9246B5FC00014BC0C /* objmemory.h */,
-				95B15FD3246B5FC00014BC0C /* oops.h */,
-				95B15FDA246B5FC00014BC0C /* posixfilesystem.h */,
-				95B15FDB246B5FC00014BC0C /* realwordmemory.h */,
-			);
-			path = Smalltalk;
 			sourceTree = "<group>";
 		};
 		95B15FE0246B5FD60014BC0C /* Frameworks */ = {
@@ -156,10 +148,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				95B15FDF246B5FC00014BC0C /* bitblt.cpp in Sources */,
-				95B15FDD246B5FC00014BC0C /* main.cpp in Sources */,
-				95B15FDC246B5FC00014BC0C /* objmemory.cpp in Sources */,
-				95B15FDE246B5FC00014BC0C /* interpreter.cpp in Sources */,
+				953CC35C246B8834001B3AC8 /* bitblt.cpp in Sources */,
+				953CC35B246B8834001B3AC8 /* objmemory.cpp in Sources */,
+				953CC35A246B8834001B3AC8 /* main.cpp in Sources */,
+				953CC359246B8834001B3AC8 /* interpreter.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
