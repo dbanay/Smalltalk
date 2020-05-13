@@ -871,6 +871,10 @@ int main(int argc, const char * argv[]) {
     {
         vm->run();
     }
+    else
+    {
+        std::cerr << "VM failed to initialize (invalid/missing directory or snapshot?)"  << std::endl;
+    }
     delete vm;
 
     return 0;
