@@ -41,7 +41,7 @@
 //#define RECURSIVE_GRAPH_TRAVERSAL
 
 // Perform range checks etc. at runtime
-//#define RUNTIME_CHECKING
+#define RUNTIME_CHECKING
 
 #ifdef RUNTIME_CHECKING
 #define RUNTIME_CHECK2(c,f,l) runtime_check(c, "RUNTIME ERROR: (" #c ") at: " f "(" #l ")")

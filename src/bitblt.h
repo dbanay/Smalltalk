@@ -80,17 +80,14 @@ public:
         }
         destFormWidth = memory.integerValueOf(memory.fetchWord_ofObject(WidthInForm, destForm));
         destFormHeight = memory.integerValueOf(memory.fetchWord_ofObject(HeightInForm, destForm));
- 
         updatedX = 0;
         updatedY = 0;
         updatedWidth = 0;
         updatedHeight = 0;
-
-
     }
 
 
-    void copyBits();
+    bool copyBits();
 
     void getUpdatedBounds(int *boundsX, int *boundsY, int *boundsWidth, int *boundsHeight)
     {
@@ -253,6 +250,8 @@ protected:
         sourceIndex, sourceDelta, destIndex, destDelta,
         sx, sy, dx, dy, w, h;
     
+    int sourceBitsWordLength, destBitsWordLength;
+    
     //sourceRaster is the source pitch, and destRaster the destination pitch.
     //I guess these terms were unknown to the implementors.
     
@@ -266,6 +265,12 @@ protected:
     
     // Actual area affected by last copyBots
     int updatedX, updatedY, updatedWidth, updatedHeight;
+protected:
+    inline int formWordCount(int width, int height)
+    {
+        return (width + 15) / 16 * height;
+    }
+
 };
 
 //Character Scanner
@@ -344,6 +349,7 @@ public:
     int stopConditions;
     int xTable;
     int lastIndex;
+
     
 };
 

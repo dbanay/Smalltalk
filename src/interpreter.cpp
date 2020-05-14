@@ -934,24 +934,26 @@ void Interpreter::primitiveCopyBits()
     int width = fetchInteger_ofObject(WidthIndex, bitBltPointer);
     int height = fetchInteger_ofObject(HeightIndex, bitBltPointer);
 
-    BitBlt bitBlt(memory,
-                  destForm,
-                  sourceForm,
-                  memory.fetchPointer_ofObject(HalftoneFormIndex, bitBltPointer),
-                  fetchInteger_ofObject(CombinationRuleIndex, bitBltPointer),
-                  destX,
-                  destY,
-                  width,
-                  height,
-                  sourceX,
-                  sourceY,
-                  clipX,
-                  clipY,
-                  clipWidth,
-                  clipHeight);
     if (success())
     {
+        BitBlt bitBlt(memory,
+                      destForm,
+                      sourceForm,
+                      memory.fetchPointer_ofObject(HalftoneFormIndex, bitBltPointer),
+                      fetchInteger_ofObject(CombinationRuleIndex, bitBltPointer),
+                      destX,
+                      destY,
+                      width,
+                      height,
+                      sourceX,
+                      sourceY,
+                      clipX,
+                      clipY,
+                      clipWidth,
+                      clipHeight);
+
         int updatedX, updatedY, updatedWidth, updatedHeight;
+        //TODO: check return and fail?
         bitBlt.copyBits();
         bitBlt.getUpdatedBounds(&updatedX, &updatedY, &updatedWidth, &updatedHeight);
         if (destForm == currentDisplay)
@@ -5243,6 +5245,7 @@ void Interpreter::primitiveNewWithArg()
 
    /* "source"
    	size <- self positive16BitValueOf: self popStack.
+    self success: size <= 65534. "dbanay: ERROR check max size"
    	class <- self popStack.
    	self success: (self isIndexable: class).
    	self success
@@ -5261,6 +5264,8 @@ void Interpreter::primitiveNewWithArg()
    */
     
     size = positive16BitValueOf(popStack());
+    success(size <= 65534);
+    
     cls  = popStack();
     success(isIndexable(cls));
     if (success())

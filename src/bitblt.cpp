@@ -140,8 +140,19 @@ void BitBlt::clipRange()
     }
 }
 
+
+// WordArray class>>maxSize
+// maxSize
+//      "The maximum size of a WordArray is 64640 elements."
+//      ^64640
+//
+// When a Form is allocated, the number of words required to hold the bits is
+// (width + 15)/16 * height. If the form is large enough this will exceed maxSize
+// and rather than fail, Smalltalk clamps the array size to 64640! This mucks
+// things up if such a form is used as a source or target.
+
 // copyBits
-void BitBlt::copyBits()
+bool BitBlt::copyBits()
 {
    /* "source"
    	"from copyBits, p.356"
@@ -158,15 +169,17 @@ void BitBlt::copyBits()
     clipRange();
     if (w > 0 && h > 0)
     {
-        if (dx == 5164)
-        {
-            printf("bingo!\n");
-        }
         updatedX = dx;
         updatedY = dy;
         updatedWidth = w;
         updatedHeight = h;
         computeMasks();
+        // Check if source or dest is "bad"
+        if (sourceForm != NilPointer && formWordCount(sourceFormWidth, sourceFormHeight) != sourceBitsWordLength  )
+            return false;
+        if (formWordCount(destFormWidth, destFormHeight) != destBitsWordLength  )
+            return false;
+
         checkOverlap();
         calculateOffsets();
         copyLoop();
@@ -179,6 +192,8 @@ void BitBlt::copyBits()
         updatedHeight = 0;
 
     }
+    
+    return true;
     
 }
 
@@ -239,11 +254,7 @@ void BitBlt::copyLoop()
    			destIndex <- destIndex + destDelta]
    */
    
-    int sourceBitsWordLength;
-    if (sourceForm != NilPointer)
-        sourceBitsWordLength = memory.fetchWordLengthOf(sourceBits);
-    else
-        sourceBitsWordLength = 0;
+    
  
     for(int i = 1; i <=h; i++)
     {
@@ -261,6 +272,7 @@ void BitBlt::copyLoop()
         if (preload)
         {
             // load the 32-bit shifter
+            
             prevWord = memory.fetchWord_ofObject(sourceIndex, sourceBits);
             sourceIndex = sourceIndex + hDir;
         }
@@ -287,7 +299,8 @@ void BitBlt::copyLoop()
                 skewWord = (skewWord << skew) | (skewWord >> (16-skew));
             }
             
-            //TODO: check and bail if destIndex is out of range
+            if (destIndex >= destBitsWordLength) return;
+            
             std::uint16_t destWord =  memory.fetchWord_ofObject(destIndex, destBits);
             // 16-bit rotate
             mergeWord = merge_with(skewWord & halftoneWord,  destWord);
@@ -297,6 +310,8 @@ void BitBlt::copyLoop()
                                                 (~mergeMask & destWord));
             sourceIndex = sourceIndex + hDir;
             destIndex = destIndex + hDir;
+ 
+            
             if (word == (nWords - 1))
                 mergeMask = mask2;
             else
@@ -386,12 +401,17 @@ void BitBlt::computeMasks()
     
     // calculate skew and edge masks
     destBits = memory.fetchPointer_ofObject(BitsInForm, destForm);
+    destBitsWordLength = memory.fetchWordLengthOf(destBits);
+
     destRaster = (destFormWidth - 1) / 16 + 1;
     if (sourceForm != NilPointer)
     {
         sourceBits = memory.fetchPointer_ofObject(BitsInForm, sourceForm);
+        sourceBitsWordLength = memory.fetchWordLengthOf(sourceBits);
         sourceRaster = (sourceFormWidth - 1) / 16 + 1;
     }
+    else
+        sourceBitsWordLength = 0;
     
     if (halftoneForm != NilPointer)
     {
