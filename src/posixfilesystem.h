@@ -39,7 +39,7 @@ public:
     {
         int fd;
         std::string path = path_for_file(name);
-#ifdef WIN32
+#ifdef _WIN32
 
         errno_t code = _sopen_s(&fd, path.c_str(), _O_RDWR | _O_BINARY, _SH_DENYNO, _S_IREAD | _S_IWRITE);
 
@@ -54,7 +54,7 @@ public:
     {
         int fd;
         std::string path = path_for_file(name);
-#ifdef WIN32
+#ifdef _WIN32
         errno_t code = _sopen_s(&fd, path.c_str(), _O_RDWR | _O_BINARY | _O_CREAT | _O_TRUNC, _SH_DENYNO, _S_IREAD | _S_IWRITE);
 #else
         fd = open(path.c_str(), O_RDWR | O_CREAT | O_TRUNC, 0644);
@@ -65,7 +65,7 @@ public:
     
     int close_file(int file_handle)
     {
-#ifdef WIN32
+#ifdef _WIN32
         if (file_handle == -1) return -1;
         return _close(file_handle);
 #else
@@ -75,7 +75,7 @@ public:
 
     int read(int file_handle, char *buffer, int bytes)
     {
-#ifdef WIN32
+#ifdef _WIN32
         return _read(file_handle, buffer, bytes);
 #else
         return (int) ::read(file_handle, buffer, bytes);
@@ -84,7 +84,7 @@ public:
 
     int write(int file_handle, const char *buffer, int bytes)
     {
-#ifdef WIN32
+#ifdef _WIN32
         return _write(file_handle, buffer, bytes);
 #else
         return (int) ::write(file_handle, buffer, bytes);
@@ -94,7 +94,7 @@ public:
 
     bool truncate_to(int file_handle, int length)
     {
-#ifdef WIN32
+#ifdef _WIN32
         return _chsize(file_handle, length) != -1;
 #else
         return ftruncate(file_handle, length) != -1;
@@ -103,7 +103,7 @@ public:
 
     int file_size(int file_handle)
     {
-#ifdef WIN32
+#ifdef _WIN32
         if (file_handle == -1) return -1;
         
         struct _stat s;
@@ -126,14 +126,14 @@ public:
 
     bool file_flush(int file_handle)
     {
-#ifndef WIN32
+#ifndef _WIN32
         return fsync(file_handle) != -1;
 #else
         return true;
 #endif
     }
     
-#ifndef WIN32
+#ifndef _WIN32
     bool is_diretory(const char *name)
     {
         std::string path = path_for_file(name);
@@ -147,7 +147,7 @@ public:
     // Directory orientated operations
     void enumerate_files(const std::function <void (const char *) >& each)
     {
-#ifndef WIN32
+#ifndef _WIN32
         DIR *dir = opendir(root_directory.c_str());
         struct dirent *entry;
 
@@ -163,7 +163,7 @@ public:
         closedir(dir);
 #else
         HANDLE hFind = INVALID_HANDLE_VALUE;
-        WIN32_FIND_DATAA findFileData;
+        _WIN32_FIND_DATAA findFileData;
 
         std::string pattern = root_directory + "\\*";
         
@@ -199,7 +199,7 @@ public:
     {
         std::string path = path_for_file(file_name);
 
-#ifdef WIN32
+#ifdef _WIN32
         return _unlink(path.c_str()) != -1;
 
 #else
@@ -209,7 +209,7 @@ public:
 
     int seek_to(int file_handle, int position)
     {
-#ifdef WIN32
+#ifdef _WIN32
         return (int) _lseek(file_handle, position, SEEK_SET);
 #else
         return (int) lseek(file_handle, position, SEEK_SET);
@@ -219,7 +219,7 @@ public:
     
     int tell(int file_handle)
     {
-#ifdef WIN32
+#ifdef _WIN32
         return (int) _lseek(file_handle, 0, SEEK_CUR);
 #else
         return (int) lseek(file_handle, 0, SEEK_CUR);
@@ -234,7 +234,7 @@ public:
 
     const char *error_text(int code)
     {
-#ifdef WIN32
+#ifdef _WIN32
         static char errmsg[512];
         strerror_s(errmsg, sizeof(errmsg), code);
         return errmsg;
