@@ -2489,7 +2489,7 @@ void Interpreter::dispatchPrivatePrimitives()
 {
     switch (primitiveIndex)
     {
-        case 120: // beSnapshot
+        case 128: // beSnapshot
             primitiveBeSnapshotFile();
             break;
         case 130: // Posix File primitives
@@ -2512,8 +2512,9 @@ void Interpreter::dispatchPrivatePrimitives()
 
 void Interpreter::primitiveBeSnapshotFile()
 {
+
     int fileObjectPointer = stackTop();
-    int fileNamePointer = memory.fetchPointer_ofObject(2, fileObjectPointer); // fileName field
+    int fileNamePointer = memory.fetchPointer_ofObject(FileNameIndex, fileObjectPointer); // fileName field
     std::string fileName = stringFromObject(fileNamePointer);
     
     hal->set_image_name(fileName.c_str());
@@ -2730,9 +2731,10 @@ void Interpreter::primtivePosixDirectoryOperation()
      2     new name  PosixFile  true/false           rename file
      3     nil                  Array of strings     Array of file names in directory
      */
- 
+    
     const int DescriptorIndex  = 8; // fd field of PosixFile
-    const int FileNameIndex = 1;    // fileName field of PosixFile
+
+ 
     int arg2 = popStack();
     int arg1 = popStack();
     int code = popInteger();

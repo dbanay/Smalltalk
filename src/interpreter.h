@@ -1388,10 +1388,8 @@ private:
     static const int HeightInForm = 2;
     static const int OffsetInForm = 3;
     
-
-
-
-
+    // Files
+    static const int FileNameIndex = 1;    // fileName field of File
     
     // "Registers"
     int activeContext;
