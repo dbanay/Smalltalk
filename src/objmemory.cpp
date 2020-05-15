@@ -67,8 +67,6 @@ bool ObjectMemory::loadObjectTable(IFileSystem *fileSystem, int fd)
     if (fileSystem->seek_to(fd, fileSize - objectTableLength*2) == -1) // Reposition to start of object table
         return false;
 
-
-
     for(int objectPointer = 0; objectPointer < objectTableLength; objectPointer+=2)
     {
         std::uint16_t words[2];
@@ -352,7 +350,7 @@ bool ObjectMemory::saveObjects(IFileSystem *fileSystem, int fd)
 
     }
     
-    // Npw we can go back fill in the values for the image header.
+    // Now we can go back fill in the values for the image header.
     fileSystem->seek_to(fd, 0);
     fileSystem->write(fd, (char *) &objectSpaceLength, sizeof(objectSpaceLength));
     fileSystem->write(fd, (char *) &storedObjectTableLength, sizeof(storedObjectTableLength));

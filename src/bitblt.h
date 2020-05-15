@@ -360,9 +360,6 @@ public:
     int updatedSourceX() { return sourceX; }
     int updatedLastIndex() { return lastIndex; }
     
-    // scanCharactersFrom: startIndex to: stopIndex in: sourceString rightX: rightX stopConditions: stops displaying: display
-
-    
     int scanCharactersFrom_to_in_rightX_stopConditions_displaying(int startIndex, int stopIndex, int sourceString,
                                                                   int rightX, int stop, bool displaying);
     

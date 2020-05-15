@@ -520,8 +520,12 @@ void BitBlt::checkOverlap()
 // CharacterScanner
 
 int CharacterScanner::scanCharactersFrom_to_in_rightX_stopConditions_displaying(
-                                                                                int startIndex, int stopIndex, int sourceString,
-                                                                                int rightX, int stops, bool displaying)
+                                                                                int startIndex,
+                                                                                int stopIndex,
+                                                                                int sourceString,
+                                                                                int rightX,
+                                                                                int stops,
+                                                                                bool displaying)
 {
     const int EndOfRun = 257; // TextConstants at: #EndOfRun put: 257.
     const int CrossedX = 258; // TextConstants at: #CrossedX put: 258.    
@@ -562,7 +566,6 @@ int CharacterScanner::scanCharactersFrom_to_in_rightX_stopConditions_displaying(
         nextDestX = destX + width;
         if (nextDestX > rightX)
         {
-            
             return memory.fetchPointer_ofObject(CrossedX-1, stops);
         }
         if (displaying) copyBits();

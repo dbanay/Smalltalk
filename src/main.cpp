@@ -564,12 +564,6 @@ public:
             return;
         }
 #endif
-        if (key.keysym.scancode == SDL_SCANCODE_P && key.keysym.mod == KMOD_LGUI)
-        {
-            if (type == 3)
-                saveScreenShot();
-            return;
-        }
 
         // My initial plan was to use go unencoded for everything, but
         // when I pressed shift 6, I saw a ~ appear!. It turns out the
@@ -767,119 +761,7 @@ public:
                 SDL_Delay(vm_options.novsync_delay); // Don't kill CPU
         }
     }
-    
-    void saveScreenShot()
-
-    {
-
-        static int snap = 0;
-
-        std::stringstream ss;
-
-        ss << getenv("HOME") << "/snap" << snap++ << ".pbm";
-
-        
-
-        std::ofstream output(ss.str(), std::ios::binary);
-
-        output.exceptions(std::ifstream::failbit | std::ifstream::badbit);
-
-        int width = display_width;
-
-        int height = display_height;
-
-        
-        int displayBitmap = interpreter.getDisplayBits(display_width, display_height);
-
-        output << "P1\n" << width << " " << height << std::endl;
-
-        
-
-         int stride = ((width + 16 - 1) / 16);
-
-         /*
-
-          P1
-
-          # This is an example bitmap of the letter "J"
-
-          6 10
-
-          0 0 0 0 1 0
-
-          0 0 0 0 1 0
-
-          0 0 0 0 1 0
-
-          0 0 0 0 1 0
-
-          0 0 0 0 1 0
-
-          0 0 0 0 1 0
-
-          1 0 0 0 1 0
-
-          0 1 1 1 0 0
-
-          0 0 0 0 0 0
-
-          0 0 0 0 0 0
-
-          */
-
-        
-
-        int word_index = 0;
-
-
-        for(int h = 0; h < height; h++)
-
-        {
-
-            int pixels_remaining = width;
-
-            for(int i = 0; i < stride; i++)
-
-            {
-
-                std::uint16_t word = interpreter.fetchWord_ofDislayBits(word_index, displayBitmap);
-
-                int bit = 15;
-
-                while (bit >= 0 && pixels_remaining > 0)
-
-                {
-
-                    output << (word & (1<<bit) ? 1 : 0) << " ";
-
-                    pixels_remaining--;
-
-                    bit--;
-
-                }
-
-                word_index++;
-
-            }
-
-            output << std::endl;
-
-
-
-        }
-
-        output << std::endl;
-
-        output.close();
-
-        
-
-       std::cout << "Sceenshot!" << std::endl;
-
-    }
-
-
-    
+     
     struct options vm_options;
 
     PosixST80FileSystem fileSystem;

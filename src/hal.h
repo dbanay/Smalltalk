@@ -63,14 +63,16 @@ public:
     // Notify that screen contents changed
     virtual void display_changed(int x, int y, int width, int height) = 0;
     
-    //Input queue
+    // Input queue
     virtual bool next_input_word(std::uint16_t *word) = 0;
     
+    // Report catastrophic failure
     virtual void error(const char *message) = 0;
     
     // lifetime
     virtual void signal_quit() = 0;
-    virtual void exit_to_debbuger() = 0; // calls abort();
+    virtual void exit_to_debbuger() = 0;
+    
     virtual const char *get_image_name() = 0;
     virtual void set_image_name(const char *new_name) = 0;
 };
