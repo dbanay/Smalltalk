@@ -5,9 +5,27 @@
 //  Created by Dan Banay on 2/20/20.
 //  Copyright © 2020 Dan Banay. All rights reserved.
 //
+//  MIT License
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
+//
 
 #pragma once
-
 
 #include <cstdint>
 #include <cassert>
@@ -22,8 +40,8 @@
 // has a back reference to that MethodContext (the sender field). If a reference counting only
 // scheme is used, then free object table entries will eventually be consumed. If, on the other hand,
 // a GC only approach is used then memory will fill up with contexts and GC will happen fairly
-// frequently. Therefore, the hybrid reference counting with full garbage collection when too much
-// circular garabge accumulates is recommended.
+// frequently. Therefore, the hybrid reference counting approach with full garbage collection
+// when too much circular garabge accumulates is recommended.
 
 // GM_MARK_SWEEP and GC_REF_COUNT are not mutually exclusive!
 // You can define *BOTH* for a hybrid collector which ref counts until
@@ -37,7 +55,8 @@
 
 
 // Define to use recursive object traversal for ref counting/GC
-// If undefined the stack space efficient pointer reversal approach described on page 678 of G&R is used
+// If undefined the stack space efficient pointer reversal approach described
+// on page 678 of G&R is used. Not recommended, and only included for completeness.
 //#define RECURSIVE_GRAPH_TRAVERSAL
 
 // Perform range checks etc. at runtime
@@ -55,7 +74,9 @@
 class IGCNotification
 {
 public:
+    // About to garbage collect. Client should call addRoot to specify roots of the world
     virtual void prepareForCollection() = 0;
+    // Garbage collection has been completed
     virtual void collectionCompleted() = 0;
 };
 
@@ -66,7 +87,6 @@ class ObjectMemory
 public:
 #ifdef GC_MARK_SWEEP
     ObjectMemory(IHardwareAbstractionLayer *halInterface, IGCNotification *notification = 0);
-    
 #else
     ObjectMemory(IHardwareAbstractionLayer *halInterface);
 #endif
@@ -234,7 +254,6 @@ public:
         return classBitsOf(objectPointer);
 
     }
-
     
     // integerObjectOf:
     inline int integerObjectOf(int value)
@@ -243,9 +262,7 @@ public:
         ^(value bitShift: 1) + 1
        */
         return (std::uint16_t) ((value << 1) | 1);
-
     }
-
     
     // fetchByteLengthOf:
     inline int fetchByteLengthOf(int objectPointer)
@@ -449,9 +466,7 @@ private:
        */
         return wordMemory.segment_word(segmentBitsOf(objectPointer),
                 locationBitsOf(objectPointer) + offset);
-
     }
-    
     
     // segmentBitsOf:put:
     inline int segmentBitsOf_put(int objectPointer, int value)
@@ -665,7 +680,6 @@ private:
                     firstBitIndex,
                     lastBitIndex,
                     value);
-        
     }
     
     // sizeBitsOf:put:
@@ -732,8 +746,6 @@ private:
         }
     }
 #endif
-
-
     
 private:
     RealWordMemory wordMemory;
@@ -741,6 +753,7 @@ private:
     int currentSegment; // The index of the heap segment currently being used for allocation
 
     int freeWords; // free words remaining (make primitiveFreeCore "fast")
+    
     // An a table entry with a free bit set OR that contains a reference to a free chunk
     // (free bit clear but count field zero) of memory is counted as a free oop
     int freeOops;  // free OT entries (make primtiveFreeOops "fast")
@@ -773,7 +786,7 @@ private:
     static const int FreePointerList = ObjectTableStart + ObjectTableSize; // G&R pg. 664
 
     // G&R pg. 664 - Object Table Related Constants
-    // The smallest size of chunk that is not stored on a list whose chunk sare the same size.
+    // The smallest size of chunk that is not stored on a list whose chunk share the same size.
     // (Theindex of the last free chunk list).
     static const int BigSize = 20;
     static const int FirstFreeChunkListSize = BigSize+1;
@@ -816,12 +829,13 @@ private:
     static const int FirstFreeChunkList = HeapSpaceStop + 1;
     
     // The bluebook incorrecly uses LastFreeChunkList in all places it is used! The
-    // headOfFreeChunkList:inSegment: and // headOfFreeChunkList:inSegment:put methods take
+    // headOfFreeChunkList:inSegment: and headOfFreeChunkList:inSegment:put methods take
     // a SIZE as the first parameter not a location.
     // The location of the head of the linked list of free chunks of size BigSize or larger.
     // static const int LastFreeChunkList =  FirstFreeChunkList + BigSize;
     
-    static const int NonPointer = 65535; // Any sixteen-bit value that cannot be an object table index, e.g.,2**16~1.
+    // Any sixteen-bit value that cannot be an object table index, e.g.,2**16~1.
+    static const int NonPointer = 65535;
     // Last special oop
     // (See SystemTracer in Smalltalk.sources)
     static const int LastSpecialOop = 52;
@@ -839,10 +853,8 @@ private:
 #ifdef GC_MARK_SWEEP
     IGCNotification *gcNofication;
 #endif
+    
+    // Interface to the host operating system
     IHardwareAbstractionLayer *hal;
-    
-    
-    
-    
 };
 

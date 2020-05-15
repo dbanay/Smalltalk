@@ -5,6 +5,25 @@
 //  Created by Dan Banay on 2/20/20.
 //  Copyright © 2020 Dan Banay. All rights reserved.
 //
+//  MIT License
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
+//
 
 #include "bitblt.h"
 #include <cassert>
@@ -71,11 +90,7 @@ void BitBlt::clipRange()
          clipHeight = destFormHeight - clipY;
      }
 
-    //TODO: More checks. What if destX beyond right edge of clip rect? destY below bottom?
-    //TODO: right of destRect to left of clipX?  etc. etc.
-    
-    
-   // clip and adjust source origin and extent appropriately
+    // clip and adjust source origin and extent appropriately
    // first in x
     if (destX >= clipX)
     {

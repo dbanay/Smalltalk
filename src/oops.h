@@ -5,6 +5,26 @@
 //  Created by Dan Banay on 3/5/20;
 //  Copyright © 2020 Dan Banay; All rights reserved;
 //
+//  MIT License
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
+//
+
 
 #pragma once
 
@@ -16,8 +36,6 @@
 static const int NilPointer = 2;
 static const int FalsePointer = 4;
 static const int TruePointer = 6;
-
-
 
 // Root
 static const int SchedulerAssociationPointer = 8;
@@ -37,7 +55,6 @@ static const int ClassCharacterPointer = 40;
 static const int ClassCompiledMethod = 34;
 static const int ClassSymbolPointer = 56;
 
-
 static const int ClassFloatPointer = 20;
 
 static const int ClassSemaphorePointer = 38;
@@ -54,7 +71,7 @@ static const int SpecialSelectorsPointer = 48;
 static const int CharacterTablePointer = 50;
 
 /*
- dbanay - first oops 2..52 are special oops... see this from SystemTracer
+ dbanay - first oops 2..52 are special oops... see this from SystemTracer:
  
  If using GC make sure these are roots
  specialObjects _

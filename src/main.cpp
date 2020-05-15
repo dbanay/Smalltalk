@@ -5,6 +5,26 @@
 //  Created by Dan Banay on 2/20/20.
 //  Copyright © 2020 Dan Banay. All rights reserved.
 //
+//  MIT License
+//  Permission is hereby granted, free of charge, to any person obtaining a copy
+//  of this software and associated documentation files (the "Software"), to deal
+//  in the Software without restriction, including without limitation the rights
+//  to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+//  copies of the Software, and to permit persons to whom the Software is
+//  furnished to do so, subject to the following conditions:
+//
+//  The above copyright notice and this permission notice shall be included in all
+//  copies or substantial portions of the Software.
+//
+//  THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+//  IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+//  FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+//  AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+//  LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+//  OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+//  SOFTWARE.
+//
+
 
 #include <iostream>
 #include <fstream>
@@ -475,7 +495,7 @@ public:
         last_event_time = now;
     }
    
-    //TODO: Remove after filesystem work?
+#if 0
     void paste_clipboard()
     {
 
@@ -491,6 +511,7 @@ public:
             }
         }
     }
+#endif
     
     /*
      decoded keyboard:
@@ -535,11 +556,18 @@ public:
          backspace 8 tab 9 line feed 10 return 13 escape 27 space 32 delete 127
 
          */
-    
+#if 0
         if (key.keysym.scancode == SDL_SCANCODE_V && key.keysym.mod == KMOD_LGUI)
         {
             if (type == 3)
                 paste_clipboard();
+            return;
+        }
+#endif
+        if (key.keysym.scancode == SDL_SCANCODE_P && key.keysym.mod == KMOD_LGUI)
+        {
+            if (type == 3)
+                saveScreenShot();
             return;
         }
 
@@ -719,15 +747,6 @@ public:
     
     void run()
     {
-        
-        #define FPS_INTERVAL 1.0 //seconds.
-
-        Uint32 fps_lasttime = SDL_GetTicks(); //the last recorded time.
-        Uint32 fps_current = 0; //the current FPS.
-        Uint32 fps_frames = 0; //frames passed since the last recorded fps.
-
-
-
         for(;;)
         {
             process_events();
@@ -741,25 +760,125 @@ public:
             }
             
             if (quit_signalled) break;
-            
-            
+ 
             render();
-
-            //TODO: Removes
-            fps_frames++;
-            if (fps_lasttime < SDL_GetTicks() - FPS_INTERVAL*1000)
-            {
-               fps_lasttime = SDL_GetTicks();
-               fps_current = fps_frames;
-               fps_frames = 0;
-               //printf("fps = %u\n", fps_current);
-            }
             
             if (!vm_options.vsync && vm_options.novsync_delay > 0)
                 SDL_Delay(vm_options.novsync_delay); // Don't kill CPU
-          
         }
     }
+    
+    void saveScreenShot()
+
+    {
+
+        static int snap = 0;
+
+        std::stringstream ss;
+
+        ss << getenv("HOME") << "/snap" << snap++ << ".pbm";
+
+        
+
+        std::ofstream output(ss.str(), std::ios::binary);
+
+        output.exceptions(std::ifstream::failbit | std::ifstream::badbit);
+
+        int width = display_width;
+
+        int height = display_height;
+
+        
+        int displayBitmap = interpreter.getDisplayBits(display_width, display_height);
+
+        output << "P1\n" << width << " " << height << std::endl;
+
+        
+
+         int stride = ((width + 16 - 1) / 16);
+
+         /*
+
+          P1
+
+          # This is an example bitmap of the letter "J"
+
+          6 10
+
+          0 0 0 0 1 0
+
+          0 0 0 0 1 0
+
+          0 0 0 0 1 0
+
+          0 0 0 0 1 0
+
+          0 0 0 0 1 0
+
+          0 0 0 0 1 0
+
+          1 0 0 0 1 0
+
+          0 1 1 1 0 0
+
+          0 0 0 0 0 0
+
+          0 0 0 0 0 0
+
+          */
+
+        
+
+        int word_index = 0;
+
+
+        for(int h = 0; h < height; h++)
+
+        {
+
+            int pixels_remaining = width;
+
+            for(int i = 0; i < stride; i++)
+
+            {
+
+                std::uint16_t word = interpreter.fetchWord_ofDislayBits(word_index, displayBitmap);
+
+                int bit = 15;
+
+                while (bit >= 0 && pixels_remaining > 0)
+
+                {
+
+                    output << (word & (1<<bit) ? 1 : 0) << " ";
+
+                    pixels_remaining--;
+
+                    bit--;
+
+                }
+
+                word_index++;
+
+            }
+
+            output << std::endl;
+
+
+
+        }
+
+        output << std::endl;
+
+        output.close();
+
+        
+
+       std::cout << "Sceenshot!" << std::endl;
+
+    }
+
+
     
     struct options vm_options;
 
