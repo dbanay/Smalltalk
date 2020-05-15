@@ -5258,7 +5258,7 @@ void Interpreter::primitiveNewWithArg()
 
    /* "source"
    	size <- self positive16BitValueOf: self popStack.
-    self success: size <= 65534. "dbanay: ERROR check max size"
+    self success: size <= 65533. "dbanay: ERROR check max size"
    	class <- self popStack.
    	self success: (self isIndexable: class).
    	self success
@@ -5277,7 +5277,7 @@ void Interpreter::primitiveNewWithArg()
    */
     
     size = positive16BitValueOf(popStack());
-    success(size <= 65534);
+    success(size <= 65533);
     
     cls  = popStack();
     success(isIndexable(cls));

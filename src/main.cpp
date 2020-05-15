@@ -588,6 +588,9 @@ public:
         {
             if (type == 3)
             {
+                if (key.keysym.mod & (KMOD_LGUI|KMOD_RGUI))
+                    return; // Ignore
+
                 if (key.keysym.mod & (KMOD_LSHIFT|KMOD_RSHIFT))
                     param = shift_map[param];
                 
