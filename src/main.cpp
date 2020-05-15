@@ -858,7 +858,7 @@ int main(int argc, const char * argv[]) {
     
     vm_options.snapshot_name = "snapshot.im";
     vm_options.vsync = false;
-    vm_options.novsync_delay = 8;
+    vm_options.novsync_delay = 0;  // Try -delay 8 arg if your CPU is unhappy
     vm_options.cycles_per_frame = 1800;
     vm_options.display_scale = 1;
  

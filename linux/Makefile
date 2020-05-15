@@ -1,6 +1,6 @@
-CFLAGS	:=  -std=c++17
+CFLAGS	:=  -std=c++17 -O3
 
-CC = g++ -std=c++17 -O3
+CC = g++ 
 SRC := ../src
 OBJS := objmemory.o bitblt.o main.o interpreter.o
 
