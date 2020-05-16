@@ -177,8 +177,6 @@ public:
         
         return (std::int16_t)(objectPointer & 0xfffe)/2;
         // Right shifting a negative number is undefined according to the standard.
-        // Most implementations use an arithmetic right shift. If this isn't the
-        // case for your cmpiler, uncomment the version below.
         // return ((std::int16_t) objectPointer) >> 1;
     }
     

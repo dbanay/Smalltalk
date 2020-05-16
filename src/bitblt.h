@@ -360,8 +360,13 @@ public:
     int updatedSourceX() { return sourceX; }
     int updatedLastIndex() { return lastIndex; }
     
-    int scanCharactersFrom_to_in_rightX_stopConditions_displaying(int startIndex, int stopIndex, int sourceString,
-                                                                  int rightX, int stop, bool displaying);
+    int scanCharactersFrom_to_in_rightX_stopConditions_displaying(
+                                                                  int startIndex,
+                                                                  int stopIndex,
+                                                                  int sourceString,
+                                                                  int rightX,
+                                                                  int stop,
+                                                                  bool displaying);
     
     int stopConditions;
     int xTable;

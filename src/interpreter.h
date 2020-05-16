@@ -1439,7 +1439,7 @@ private:
     int currentDisplayHeight;
     int currentCursor;
     
-    
+    // Return a std::string for a string or symbol oop
     std::string stringFromObject(int strOop);
     int stringObjectFor(const char *s);
 

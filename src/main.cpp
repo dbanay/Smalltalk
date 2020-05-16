@@ -47,9 +47,6 @@
 typedef std::uint16_t Pixel;
 static const SDL_PixelFormatEnum TextureFormat = SDL_PIXELFORMAT_RGB565;
 
-//typedef std::uint32_t Pixel;
-//static const SDL_PixelFormatEnum TextureFormat = SDL_PIXELFORMAT_ARGB8888;
-
 
 static inline void expand_pixel(Pixel *destPixel, std::uint16_t srcWord, int srcBit)
 {
@@ -127,7 +124,7 @@ public:
         }
     }
 
-    // schedule a semaphore to be signaled at a time. Only one outstanding
+    // Schedule a semaphore to be signaled at a time. Only one outstanding
     // request may be scheduled at anytime. When called any outstanding
     // request will be replaced (or canceled if semaphore is 0).
     // Will signal immediate if scheduled time has passed.

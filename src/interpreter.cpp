@@ -876,7 +876,7 @@ void Interpreter::primitiveInputWord()
     /*
      Return the next word from the input buffer and remove the word from the
      buffer. This message should be sent just after the input semaphore
-     finished a wait (was sent a signal by an I/O device). Fail of the input
+     finished a wait (was sent a signal by an I/O device). Fail if the input
      buffer is empty.
      */
         
@@ -1429,7 +1429,6 @@ void Interpreter::returnBytecode()
         case 123: returnValue_to(NilPointer, sender()); break;
         case 124: returnValue_to(popStack(), sender()); break;
         case 125: returnValue_to(popStack(), caller()); break;
-
     }
 }
 
@@ -1874,8 +1873,8 @@ int Interpreter::removeFirstLinkOfList(int aLinkedList)
    	^firstLink
    */
     /*
-     If the object memory uses garbage collection, it simply must avoid doing a collection in the middle of a primitive routine.
      The routines listed here ignore the reference-counting problem in the interest of clarity. (pg. 644 G&R).
+     Found and fixed. -dbanay
      */
     
     firstLink = memory.fetchPointer_ofObject(FirstLinkIndex, aLinkedList);

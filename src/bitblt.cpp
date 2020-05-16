@@ -26,7 +26,7 @@
 //
 
 #include "bitblt.h"
-#include <cassert>
+
 
 // clipRange
 void BitBlt::clipRange()

@@ -87,6 +87,7 @@ bool ObjectMemory::loadObjectTable(IFileSystem *fileSystem, int fd)
     }
     
     // Build the OT entry free list, Go backwards so we have lower entries first on free list.
+    // Why? Makes the OT easier to see in debugger.
     // Note we skip oop 0, which is considered reserved and invalid. (page 2, Xerox Virtual Image booklet)
     for(int objectPointer = ObjectTableSize-2; objectPointer >= 2; objectPointer -= 2)
         if (freeBitOf(objectPointer))

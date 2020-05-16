@@ -35,14 +35,14 @@ public:
     // Specify the semaphore to signal on input
     virtual void set_input_semaphore(int semaphore) = 0;
     
-    // the number of seconds since 00:00 in the morning of January 1, 1901
+    // The number of seconds since 00:00 in the morning of January 1, 1901
     virtual std::uint32_t get_smalltalk_epoch_time() = 0;
     
     // the number of milliseconds since the millisecond clock was
     // last reset or rolled over (a 32-bit unsigned number)
     virtual std::uint32_t get_msclock() = 0;
     
-    // schedule a semaphore to be signaled at a time. Only one outstanding
+    // Schedule a semaphore to be signaled at a time. Only one outstanding
     // request may be scheduled at anytime. When called any outstanding
     // request will be replaced (or canceled if semaphore is 0).
     // Will signal immediate if scheduled time has passed.
@@ -69,10 +69,11 @@ public:
     // Report catastrophic failure
     virtual void error(const char *message) = 0;
     
-    // lifetime
+    // Lifetime
     virtual void signal_quit() = 0;
     virtual void exit_to_debbuger() = 0;
     
+    // Snapshot name
     virtual const char *get_image_name() = 0;
     virtual void set_image_name(const char *new_name) = 0;
 };
