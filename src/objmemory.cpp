@@ -1143,7 +1143,7 @@ void ObjectMemory::deallocate(int objectPointer)
     toFreeChunkList_add(std::min(space, (int) BigSize), objectPointer);
 }
 
-#ifdef RECURSIVE_GRAPH_TRAVERSAL
+#ifdef RECURSIVE_MARKING
 // recursive version -- stack hungry
 // forAllOtherObjectsAccessibleFrom:suchThat:do:
 int ObjectMemory::forAllOtherObjectsAccessibleFrom_suchThat_do(

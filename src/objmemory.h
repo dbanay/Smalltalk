@@ -54,10 +54,10 @@
 #define GC_REF_COUNT
 
 
-// Define to use recursive object traversal for ref counting/GC
+// Define to use recursive marking for ref counting/GC
 // If undefined the stack space efficient pointer reversal approach described
 // on page 678 of G&R is used. Not recommended, and only included for completeness.
-//#define RECURSIVE_GRAPH_TRAVERSAL
+//#define RECURSIVE_MARKING
 
 // Perform range checks etc. at runtime
 #define RUNTIME_CHECKING

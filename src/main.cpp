@@ -657,15 +657,22 @@ public:
         }
         else
         {
+            #ifdef __APPLE__
+                                const Uint32 BlueFlags = KMOD_RGUI|KMOD_LGUI;
+            #else
+                                const Uint32 BlueFlags = KMOD_RALT|KMOD_LALT;
+
+            #endif
+            
             /*
              Left            = Red
              Right/Ctrl+Left = Yellow
-             Alt+Left        = Blue
+             Alt+Left(win+linux) /Command+Left(mac)        = Blue
              */
             switch(mouse.button)
             {
                 case SDL_BUTTON_LEFT:
-                    if (mods & (KMOD_RALT|KMOD_LALT))
+                    if (mods & BlueFlags)
                         smalltalk_button = BlueButton;
                     else if (mods & (KMOD_RCTRL|KMOD_LCTRL))
                         smalltalk_button = YellowButton;
