@@ -44,8 +44,6 @@
 #include <queue>
 
 
-//#define THREE_BUTTON_MOUSE
-
 typedef std::uint16_t Pixel;
 static const SDL_PixelFormatEnum TextureFormat = SDL_PIXELFORMAT_RGB565;
 
@@ -62,6 +60,7 @@ struct options
 {
     std::string root_directory;
     std::string snapshot_name;
+    bool        three_buttons;
     int         cycles_per_frame;
     int         display_scale;
     bool        vsync;
@@ -643,39 +642,43 @@ public:
         else
             mods = button_down_mods[button_index];
 
-#ifdef THREE_BUTTON_MOUSE
-        // Real 3 button mouse
-        switch(mouse.button)
+
+        if (vm_options.three_buttons)
         {
-            case SDL_BUTTON_LEFT:   smalltalk_button = RedButton;    break;
-            case SDL_BUTTON_MIDDLE: smalltalk_button = YellowButton; break;
-            case SDL_BUTTON_RIGHT:  smalltalk_button = BlueButton;   break;
-            default:
-                return;
+            // Real 3 button mouse
+            switch(mouse.button)
+            {
+                case SDL_BUTTON_LEFT:   smalltalk_button = RedButton;    break;
+                case SDL_BUTTON_MIDDLE: smalltalk_button = YellowButton; break;
+                case SDL_BUTTON_RIGHT:  smalltalk_button = BlueButton;   break;
+                default:
+                    return;
+            }
         }
-#else
-        /*
-         Left            = Red
-         Right/Ctrl+Left = Yellow
-         Alt+Left        = Blue
-         */
-        switch(mouse.button)
+        else
         {
-            case SDL_BUTTON_LEFT:
-                if (mods & (KMOD_RALT|KMOD_LALT))
-                    smalltalk_button = BlueButton;
-                else if (mods & (KMOD_RCTRL|KMOD_LCTRL))
+            /*
+             Left            = Red
+             Right/Ctrl+Left = Yellow
+             Alt+Left        = Blue
+             */
+            switch(mouse.button)
+            {
+                case SDL_BUTTON_LEFT:
+                    if (mods & (KMOD_RALT|KMOD_LALT))
+                        smalltalk_button = BlueButton;
+                    else if (mods & (KMOD_RCTRL|KMOD_LCTRL))
+                        smalltalk_button = YellowButton;
+                    else
+                        smalltalk_button = RedButton;
+                    break;
+                case SDL_BUTTON_RIGHT:
                     smalltalk_button = YellowButton;
-                else
-                    smalltalk_button = RedButton;
-                break;
-            case SDL_BUTTON_RIGHT:
-                smalltalk_button = YellowButton;
-                break;
-            default:
-                return;  /* Don't care about this button */
+                    break;
+                default:
+                    return;  /* Don't care about this button */
+            }
         }
-#endif
   
         if (mouse.type == SDL_MOUSEBUTTONDOWN)
         {
@@ -843,6 +846,10 @@ static bool process_args(int argc, const char *argv[], struct options &options)
         {
             options.vsync = true;
         }
+        else if (strcmp(argv[arg], "-three") == 0)
+        {
+            options.three_buttons = true;
+        }
         else
             return false;
         arg++;
@@ -857,6 +864,7 @@ int main(int argc, const char * argv[]) {
     struct options vm_options;
     
     vm_options.snapshot_name = "snapshot.im";
+    vm_options.three_buttons = false;
     vm_options.vsync = false;
     vm_options.novsync_delay = 0;  // Try -delay 8 arg if your CPU is unhappy
     vm_options.cycles_per_frame = 1800;

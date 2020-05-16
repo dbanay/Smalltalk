@@ -32,7 +32,7 @@
 #include "hal.h"
 
 // Add some helpful methods if defined
-#define DEBUGGING_SUPPORT
+//#define DEBUGGING_SUPPORT
 
 // implement optional primitiveNext
 #define IMPLEMENT_PRIMITIVE_NEXT
