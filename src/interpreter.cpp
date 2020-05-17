@@ -473,7 +473,7 @@ void Interpreter::primitiveSize()
 
    /* "source"
    	array <- self popStack.
-    "dbanay ERROR makre sure a pointer!"
+    "dbanay ERROR make sure it is a pointer!"
     self success: memory isIntegerObject: array.
     self success ifTrue: [ class <- memory fetchClassOf: array.
                            length <- self positive16BitIntegerFor:
@@ -909,7 +909,7 @@ int Interpreter::getDisplayBits(int width, int height)
     // when saving for example.
     if (computedSize != actualSize)
         return 0;
-    return displayBits; // alrighty then...
+    return displayBits; // ok then...
 }
 
 void Interpreter::updateDisplay(int destForm, int updatedX, int updatedY, int updatedWidth, int updatedHeight)
@@ -998,7 +998,7 @@ void Interpreter::primitiveSnapshot()
     memory.garbageCollect();
     memory.saveSnapshot(fileSystem, hal->get_image_name());
     
-    /* This is poorly deocumented by the Bluebook. There is an actual return value that is important.
+    /* This is poorly documented by the Bluebook. There is an actual return value that is important.
     see snapshotAs:thenQuit: in the Smalltalk sources. When the system resumes a snapshot the interpreter will be
     back at the point of the save, and 'self' will be at the top of the stack. But after saving we
     return nil to tell the caller that we just wrote a snapshot. This is how we can distinguish
@@ -1048,11 +1048,11 @@ void Interpreter::primitiveSignalAtTick()
     /*
      
                      
-     The primitiveSignalAtTick routine is associated with the siglnal:atTick:
+     The primitiveSignalAtTick routine is associated with the signal:atTick:
      messages in ProcessorScheduler. his message takes a Semaphore as the first
      argument and a byte indexable object of at least four bytes as the second
      argument. The first four bytes of the second argument are interpreted as an
-     unsigned 32-bit integer of the type stored by the primitiveTickWordslnto
+     unsigned 32-bit integer of the type stored by the primitiveTickWordsInto
      routine. The interpreter should signal the Semaphore argument when the
      millisecond clock reaches the value specified by the second argument.
      If the specified time has passed,the Semaphore is signaled immediately.
@@ -1161,7 +1161,7 @@ void Interpreter::primitiveScanCharacters()
     int clipY;
     int clipWidth;
     int clipHeight;
-    int sourceX = 0; // unitialized... assigned during scanning
+    int sourceX = 0; // uninitialized... assigned during scanning
     int sourceY;
     int rule;
     int width =  0;
@@ -2359,7 +2359,7 @@ void Interpreter::primitiveQuit()
 
 void Interpreter::primitiveExitToDebugger()
 {
-    hal->exit_to_debbuger();
+    hal->exit_to_debugger();
 }
 
 void Interpreter::primitiveOopsLeft()
@@ -2382,7 +2382,7 @@ void Interpreter::primitiveSignalAtOopsLeftWordsLeft()
     std::uint32_t numWords = positive32BitValueOf(popStack());
     int numOops =  positive16BitValueOf(popStack());
     int semaphore =  popStack();
-    // semphore must either be nil or an instance of Semaphore
+    // sempahore must either be nil or an instance of Semaphore
     success(semaphore == NilPointer || memory.fetchClassOf(semaphore) == ClassSemaphorePointer);
     if (success())
     {
@@ -2495,7 +2495,7 @@ void Interpreter::dispatchPrivatePrimitives()
             primitivePosixFileOperation();
             break;
         case 131: // Posix Directory primitives
-            primtivePosixDirectoryOperation();
+            primitivePosixDirectoryOperation();
             break;
         case 132: // Posix error
             primitivePosixLastErrorOperation();
@@ -2561,7 +2561,7 @@ void Interpreter::primitivePosixFileOperation()
     const int PageInPageIndex  = 1; // ByteArray contents in PosixFilePage
     const int BytesInPageIndex = 4; // bytesInPage field in PosixFilePage
     
-    const int PageSize = 512;   // MUST match oage size of PosixFilePage
+    const int PageSize = 512;   // MUST match page size of PosixFilePage
     
     static std::uint8_t pageBuffer[PageSize];
     
@@ -2716,7 +2716,7 @@ void Interpreter::primitivePosixFileOperation()
     
 }
 
-void Interpreter::primtivePosixDirectoryOperation()
+void Interpreter::primitivePosixDirectoryOperation()
 {
     /*
      If you allocate an array and then allocate more objects to put into that array, the array pointer has no reference and can go away if GC happens. Be sure to push it on the stack after alloc to protect it.
@@ -2768,7 +2768,7 @@ void Interpreter::primtivePosixDirectoryOperation()
                 
             case 2: // Rename file
             {
-                int oldPos = 0; // silence unitialized variable warning
+                int oldPos = 0; // silence uninitialized variable warning
                 int file = arg2;
                 int newNameObjectPointer = arg1;
                 int descriptorObjectPointer = memory.fetchPointer_ofObject(DescriptorIndex, file);
@@ -3310,7 +3310,7 @@ void Interpreter::primitiveDivide()
 {
    int integerReceiver;
    int integerArgument;
-   int integerResult = 0; // supress warning
+   int integerResult = 0; // eliminate warning
 
    /* "source"
    	integerArgument <- self popInteger.
@@ -3653,7 +3653,7 @@ void Interpreter::dispatchFloatPrimitives()
 
 }
 
-// The primitiveAsFIoat routine converts its Smalllnteger receiver into a Float.
+// The primitiveAsFloat routine converts its SmallInteger receiver into a Float.
 void Interpreter::primitiveAsFloat()
 {
     int integerArgument = popInteger();
@@ -4875,8 +4875,8 @@ void Interpreter::pushConstantBytecode()
 }
 
 
-// jumplf:by:
-void Interpreter::jumplf_by(int condition, int offset)
+// jumpIf:by:
+void Interpreter::jumpIf_by(int condition, int offset)
 {
    int boolean;
 
@@ -4915,21 +4915,21 @@ void Interpreter::longConditionalJump()
    			of: currentBytecode.
    	offset <- offset * 256 + self fetchByte.
    	(currentBytecode between: 168 and: 171)
-   		ifTrue: [^self jumplf: TruePointer
+   		ifTrue: [^self jumpIf: TruePointer
    				by: offset].
    	(currentBytecode between: 172 and: 175)
-   		ifTrue: (^self jumplf: FalsePointer
+   		ifTrue: (^self jumpIf: FalsePointer
    				by: offset]
    */
     offset = extractBits_to_of(14, 15, currentBytecode);
     offset = offset * 256 + fetchByte();
     if (between_and(currentBytecode, 168, 171))
     {
-        jumplf_by(TruePointer, offset);
+        jumpIf_by(TruePointer, offset);
     }
     else if (between_and(currentBytecode, 172, 175))
     {
-        jumplf_by(FalsePointer, offset);
+        jumpIf_by(FalsePointer, offset);
     }
 }
 

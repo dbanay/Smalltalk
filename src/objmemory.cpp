@@ -46,7 +46,7 @@ ObjectMemory::ObjectMemory(
 ) : currentSegment(-1), freeWords(0), freeOops(0)
 {
 #ifdef GC_MARK_SWEEP
-    gcNofication = notification;
+    gcNotification = notification;
 #endif
     hal = halInterface;
 }
@@ -110,7 +110,7 @@ bool ObjectMemory::loadObjects(IFileSystem *fileSystem, int fd)
     
     // Load objects from the virtual image into the heap segments
     // being careful to not split an object across a segment boundary
-    int destinationSegement = FirstHeapSegment, destinationWord = 0;
+    int destinationSegment = FirstHeapSegment, destinationWord = 0;
     
     for(int objectPointer = 2; objectPointer < ObjectTableSize; objectPointer += 2)
     {
@@ -118,7 +118,7 @@ bool ObjectMemory::loadObjects(IFileSystem *fileSystem, int fd)
         // A free chunk has it's COUNT field set to zero but the free bit is clear
         assert (countBitsOf(objectPointer) != 0); // SANITY Make sure a freeChunk wasn't saved!
         
-        // On disk objects are stored contigulously as if a large 20-bit WORD addressed space
+        // On disk objects are stored contiguously as if a large 20-bit WORD addressed space
         // In this scheme, the OT segment and locations combine to form a WORD address
         const int objectImageWordAddress = (segmentBitsOf(objectPointer) << 16)
         + locationBitsOf(objectPointer);
@@ -133,16 +133,16 @@ bool ObjectMemory::loadObjects(IFileSystem *fileSystem, int fd)
         int extraSpace = objectSize < HugeSize || pointerBitOf(objectPointer) == 0 ? 0 : 1;
         int space = objectSize + extraSpace; // space in memory
         
-        if (space > heapSpaceRemaining[destinationSegement - FirstHeapSegment])
+        if (space > heapSpaceRemaining[destinationSegment - FirstHeapSegment])
         {
-            // No room left in the current segement, move to next
-            destinationSegement++;
-            if (destinationSegement == HeapSegmentCount) return false; // Full
+            // No room left in the current segment, move to next
+            destinationSegment++;
+            if (destinationSegment == HeapSegmentCount) return false; // Full
             destinationWord = 0;
         }
         
         // Update OT entry so that it references the object location in ObjectMemory vs the disk image
-        segmentBitsOf_put(objectPointer, destinationSegement);
+        segmentBitsOf_put(objectPointer, destinationSegment);
         locationBitsOf_put(objectPointer, destinationWord);
         
         // Store the object in the image into word memory
@@ -167,7 +167,7 @@ bool ObjectMemory::loadObjects(IFileSystem *fileSystem, int fd)
         
         destinationWord += space;
         
-        heapSpaceRemaining[destinationSegement - FirstHeapSegment] -= space;
+        heapSpaceRemaining[destinationSegment - FirstHeapSegment] -= space;
     }
     
     // Initialize the free chunk lists for each heap segment with the sentinel
@@ -178,7 +178,7 @@ bool ObjectMemory::loadObjects(IFileSystem *fileSystem, int fd)
     }
     
     freeWords = 0;
-    // Place any remaining space in each segement onto it's free chunk list, which is
+    // Place any remaining space in each segment onto it's free chunk list, which is
     // is a linked list of object pointers.
     // The chunks are linked using the class field of an object. The size field of
     // the object contains the actual size of the free chunk.
@@ -303,7 +303,7 @@ bool ObjectMemory::saveObjects(IFileSystem *fileSystem, int fd)
     int objectImageWordAddress = 0;
     for(int objectPointer = 0; objectPointer < storedObjectTableLength; objectPointer += 2)
     {
-        std::uint16_t oldOTvalue = ot(objectPointer);
+        std::uint16_t oldOTValue = ot(objectPointer);
         std::uint16_t oldOTLocation = locationBitsOf(objectPointer);
         
         if (objectPointer >= 2)
@@ -342,7 +342,7 @@ bool ObjectMemory::saveObjects(IFileSystem *fileSystem, int fd)
         words[1] = locationBitsOf(objectPointer);
    
         // Restore OT entry
-        ot_put(objectPointer, oldOTvalue);
+        ot_put(objectPointer, oldOTValue);
         locationBitsOf_put(objectPointer, oldOTLocation);
         
         // Write this entry
@@ -531,7 +531,7 @@ void ObjectMemory::reverseHeapPointersAbove(int lowWaterMark)
 // abandonFreeChunksInSegment:
 int ObjectMemory::abandonFreeChunksInSegment(int segment)
 {
-   int lowWaterMark; // Location in the segement of the first free chunk
+   int lowWaterMark; // Location in the segment of the first free chunk
    int objectPointer;
    int nextPointer;
 
@@ -638,8 +638,8 @@ void ObjectMemory::markAccessibleObjects()
         addRoot(i);
     }
 
-    if (gcNofication)
-        gcNofication->prepareForCollection();
+    if (gcNotification)
+        gcNotification->prepareForCollection();
     
 }
 #endif
@@ -770,7 +770,7 @@ void ObjectMemory::rectifyCountsAndDeallocateGarbage()
     
     freeOops = auditFreeOops();
 
-    if (gcNofication) gcNofication->collectionCompleted();
+    if (gcNotification) gcNotification->collectionCompleted();
     
 
 }
@@ -1240,7 +1240,7 @@ int ObjectMemory::forAllOtherObjectsAccessibleFrom_suchThat_do(
    					ifFalse: [offset <- self heapChunkOf: current word: size+1]. "ERROR dbanay size not size + 1"
    				"restore prior from the reversed pointer chain"
    				prior <- self heapChunkOf: current word: offset.
-   				"restore (unreverse) the pointer chain"
+   				"restore (un-reverse) the pointer chain"
    				self heapChunkOf: current word: offset put: next]]
    */
     
@@ -1288,7 +1288,7 @@ int ObjectMemory::forAllOtherObjectsAccessibleFrom_suchThat_do(
                 offset = heapChunkOf_word(current, size);
             // restore prior from the reversed pointer chain
             prior = heapChunkOf_word(current, offset);
-            // restore (unreverse) the pointer chain
+            // restore (un-reverse) the pointer chain
             heapChunkOf_word_put(current, offset, next);
          }
     }

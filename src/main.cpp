@@ -101,7 +101,7 @@ public:
     // the number of seconds since 00:00 in the morning of January 1, 1901
     std::uint32_t get_smalltalk_epoch_time()
     {
-        // Seconds betweenm 1/1/1901 00:00 and 1/1/1970 00:00
+        // Seconds between 1/1/1901 00:00 and 1/1/1970 00:00
 
         const std::uint32_t TIME_OFFSET = 2177452800;
         time_t unix_epoch_time =  time(0);
@@ -429,7 +429,7 @@ public:
     }
     
     
-    void exit_to_debbuger()
+    void exit_to_debugger()
     {
         abort();
     }

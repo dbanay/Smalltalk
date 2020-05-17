@@ -564,7 +564,7 @@ private:
     // Posix filesystem primitives -- dbanay
     void primitiveBeSnapshotFile();
     void primitivePosixFileOperation();
-    void primtivePosixDirectoryOperation();
+    void primitivePosixDirectoryOperation();
     void primitivePosixLastErrorOperation();
     void primitivePosixErrorStringOperation();
 
@@ -1142,8 +1142,8 @@ private:
         instructionPointer = instructionPointer + offset;
     }
     
-    // jumplf:by:
-    void jumplf_by(int condition, int offset);
+    // jumpIf:by:
+    void jumpIf_by(int condition, int offset);
     
     // longConditionalJump
     void longConditionalJump();
@@ -1173,12 +1173,12 @@ private:
        /* "source"
        	offset <- self extractBits: 13 to: 15
        			of: currentBytecode.
-       	self jumplf: FalsePointer
+       	self jumpIf: FalsePointer
        		by: offset + 1
        */
     
         offset = extractBits_to_of(13, 15, currentBytecode);
-        jumplf_by(FalsePointer, offset + 1);
+        jumpIf_by(FalsePointer, offset + 1);
     }
     
     
@@ -1417,7 +1417,7 @@ private:
     
     int semaphoreList[4096];
     
-    int semaphoreIndex; // The semaphorelndex register hold sthe index of the last Semaphore in the semaphoreList btuffer.
+    int semaphoreIndex; // The semaphoreIndex register hold the index of the last Semaphore in the semaphoreList buffer.
     
     // Using an array of int for method cache to remain faithful as possible to the bluebook
     // Any size change will require changes to hash function in findNewMethodInClass

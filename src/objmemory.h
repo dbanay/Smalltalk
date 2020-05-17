@@ -35,13 +35,13 @@
 #include "realwordmemory.h"
 #include "oops.h"
 
-// The Smalltalk-80 VM generates a tremendous amout of circular references as it runs
+// The Smalltalk-80 VM generates a tremendous amount of circular references as it runs
 //  -- primarily a MethodContext that references a BlockContext (from a temp field) that
 // has a back reference to that MethodContext (the sender field). If a reference counting only
 // scheme is used, then free object table entries will eventually be consumed. If, on the other hand,
 // a GC only approach is used then memory will fill up with contexts and GC will happen fairly
 // frequently. Therefore, the hybrid reference counting approach with full garbage collection
-// when too much circular garabge accumulates is recommended.
+// when too much circular garbage accumulates is recommended.
 
 // GM_MARK_SWEEP and GC_REF_COUNT are not mutually exclusive!
 // You can define *BOTH* for a hybrid collector which ref counts until
@@ -238,7 +238,7 @@ public:
     // fetchClassOf:
     inline int fetchClassOf(int objectPointer)
     {
-        /* Note that fetchClassOf:objectPointer returns IntegerClass (the object table index of Smalllnteger)
+        /* Note that fetchClassOf:objectPointer returns IntegerClass (the object table index of SmallInteger)
             if its argument is an immediate integer. G&R pg 686 */
        /* "source"
         (self isIntegerObject: objectPointer)
@@ -754,7 +754,7 @@ private:
     
     // An a table entry with a free bit set OR that contains a reference to a free chunk
     // (free bit clear but count field zero) of memory is counted as a free oop
-    int freeOops;  // free OT entries (make primtiveFreeOops "fast")
+    int freeOops;  // free OT entries (make primitiveFreeOops "fast")
     
     
     // G&R pg. 664 - Object Table Related Constants
@@ -793,10 +793,10 @@ private:
     // Heap Constants G&R pg. 658
     
     // The number of heaps segments used in the implementation.
-    // We reserve the last segemnt for the Object Table and use the remaining for the heap
+    // We reserve the last segment for the Object Table and use the remaining for the heap
     static const int HeapSegmentCount = RealWordMemory::SegmentCount - 1;
     
-    // Each heap segment is origanized as follows:
+    // Each heap segment is organized as follows:
     //
     // +-------------------------+
     // |                         |
@@ -826,7 +826,7 @@ private:
     // after the last word for object storage.
     static const int FirstFreeChunkList = HeapSpaceStop + 1;
     
-    // The bluebook incorrecly uses LastFreeChunkList in all places it is used! The
+    // The bluebook incorrectly uses LastFreeChunkList in all places it is used! The
     // headOfFreeChunkList:inSegment: and headOfFreeChunkList:inSegment:put methods take
     // a SIZE as the first parameter not a location.
     // The location of the head of the linked list of free chunks of size BigSize or larger.
@@ -849,7 +849,7 @@ private:
     bool saveObjects(IFileSystem *fileSystem, int fd);
 
 #ifdef GC_MARK_SWEEP
-    IGCNotification *gcNofication;
+    IGCNotification *gcNotification;
 #endif
     
     // Interface to the host operating system

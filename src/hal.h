@@ -71,7 +71,7 @@ public:
     
     // Lifetime
     virtual void signal_quit() = 0;
-    virtual void exit_to_debbuger() = 0;
+    virtual void exit_to_debugger() = 0;
     
     // Snapshot name
     virtual const char *get_image_name() = 0;
