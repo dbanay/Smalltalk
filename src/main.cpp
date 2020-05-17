@@ -25,6 +25,16 @@
 //  SOFTWARE.
 //
 
+// If defined, the mouse cursor is rendered by the application rather than the system.
+// System rendering is preferred, but on Windows, the cursor didn't always change
+// if the left mouse button was being held down. In addition, I found that (again)
+// on Windows, on high resolution displays the mouse cursor was tiny
+// (it wasn't respecting the display scaling setting).
+//
+
+#ifdef _WIN32
+#define SOFTWARE_MOUSE_CURSOR
+#endif
 
 #include <iostream>
 #include <fstream>
@@ -72,7 +82,12 @@ public:
         vm_options(vm_options),
         fileSystem(vm_options.root_directory),
         interpreter(this, &fileSystem),
-        window(0), renderer(0), texture(0), cursor(0),
+        window(0), renderer(0), texture(0),
+#ifdef SOFTWARE_MOUSE_CURSOR
+        mouse_texture(0),
+#else
+        cursor(0),
+#endif
         display_width(0), display_height(0),
         scheduled_semaphore(0), input_semaphore(0), scheduled_time(0),
         event_count(0), last_event_time(0),
@@ -83,10 +98,16 @@ public:
     
     ~VirtualMachine()
     {
-        if (texture)
-            SDL_DestroyTexture(texture);
+#ifdef SOFTWARE_MOUSE_CURSOR
+        if (mouse_texture)
+            SDL_DestroyTexture(mouse_texture);
+#else
         if (cursor)
             SDL_FreeCursor(cursor);
+
+#endif
+        if (texture)
+            SDL_DestroyTexture(texture);
         if (renderer)
             SDL_DestroyRenderer(renderer);
         if (window)
@@ -206,13 +227,54 @@ public:
         return new_cursor;
     }
     
+#ifdef SOFTWARE_MOUSE_CURSOR
+    void update_mouse_cursor(const std::uint16_t* cursor_bits)
+    {
+        int dest_pitch;
+        std::uint8_t* pixels;
+        
+        int code = SDL_LockTexture(mouse_texture, 0, (void **)&pixels,  &dest_pitch);
+        if (code < 0)
+        {
+            SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't LOCK MOUSE TEXTURE SDL: %s", SDL_GetError());
+            return;
+        }
+        
+        std::uint8_t* dest_row = pixels;
+        std::uint16_t* source_pixel = (std::uint16_t *) cursor_bits;
+        for(int h = 0; h < 16; h++)
+        {
+            std::uint16_t* dest_pixel = (Pixel *) dest_row;
+            for(int b = 15; b >= 0; b--)
+            {
+                // Low order bit of a 5551 pixel is alpha
+                *dest_pixel = (*source_pixel & (1 << b)) != 0;
+                dest_pixel++;
+            }
+            source_pixel++;
+            dest_row += dest_pitch;
+
+        }
+        SDL_UnlockTexture(mouse_texture);
+    }
+#endif
+    
     // Set the cursor image
     // (a 16 word form)
     void set_cursor_image(std::uint16_t *image)
     {
+#ifdef SOFTWARE_MOUSE_CURSOR
+        
+        if (!mouse_texture)
+        {
+            mouse_texture = SDL_CreateTexture(renderer, SDL_PIXELFORMAT_RGBA5551, SDL_TEXTUREACCESS_STREAMING, 16, 16);
+            SDL_SetTextureBlendMode(mouse_texture, SDL_BLENDMODE_BLEND);
+        }
+
+        update_mouse_cursor(image);
+#else
         std::uint16_t cursor_bits[16];
 
-        // save cursor bits in case we change scaling options.
         // SDL uses a MSB format, so swap the bytes
         for(int i = 0; i < 16; i++)
         {
@@ -229,6 +291,7 @@ public:
         {
             SDL_FreeCursor(old_cursor);
         }
+#endif
 
     }
     
@@ -304,6 +367,8 @@ public:
                 Uint32 flags = SDL_RENDERER_ACCELERATED | (vm_options.vsync ? SDL_RENDERER_PRESENTVSYNC : 0);
                 
                 renderer = SDL_CreateRenderer(window, -1, flags );
+                
+
             }
             
             texture = SDL_CreateTexture(renderer, TextureFormat, SDL_TEXTUREACCESS_STREAMING, display_width, display_height);
@@ -452,6 +517,11 @@ public:
             SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Couldn't initialize SDL: %s", SDL_GetError());
             return false;
         }
+        
+#ifdef SOFTWARE_MOUSE_CURSOR
+        SDL_ShowCursor(0); // We show our own...
+        
+#endif
 
         
         texture_needs_update = false;
@@ -729,6 +799,21 @@ public:
            // SDL_RenderClear(renderer);
             if (texture)
                 SDL_RenderCopy(renderer, texture, NULL, NULL);
+            
+#ifdef SOFTWARE_MOUSE_CURSOR
+                if (mouse_texture)
+                {
+                    static SDL_Rect mouse_src_rect{0,0,16,16};
+                    int mouseX, mouseY;
+                    SDL_GetMouseState(&mouseX, &mouseY);
+                    assert(mouseX >= 0 && mouseX < display_width);
+                    assert(mouseY >= 0 && mouseY < display_height);
+
+                    SDL_Rect dst = {mouseX, mouseY, 16*vm_options.display_scale, 16*vm_options.display_scale};
+                    SDL_RenderCopy(renderer, mouse_texture, &mouse_src_rect, &dst);
+                }
+#endif
+            
             SDL_RenderPresent(renderer);
             dirty_rect.x = 0;
             dirty_rect.y = 0;
@@ -790,7 +875,13 @@ public:
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *texture;
-    SDL_Cursor *cursor;
+
+    
+#ifdef SOFTWARE_MOUSE_CURSOR
+    SDL_Texture *mouse_texture;
+#else
+     SDL_Cursor *cursor;
+#endif
 
     Interpreter interpreter;
 
