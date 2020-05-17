@@ -140,7 +140,7 @@ public:
         }
     }
     
-    void update_cursor()
+    SDL_Cursor *create_cursor(const Uint8* cursor_bits)
     {
         // Maps a nibble to a byte where each bit is repeated
         // e.g. 1010 -> 11001100
@@ -164,15 +164,13 @@ public:
             0b11111111   // 1111
             
         };
+
+        SDL_Cursor* new_cursor = 0;
         
-        if (cursor)
-        {
-            SDL_FreeCursor(cursor);
-        }
-        
+
         if (vm_options.display_scale == 1)
         {
-            cursor = SDL_CreateCursor((const Uint8 *) cursor_bits, (const Uint8 *) cursor_bits, 16, 16, 0, 0);
+            new_cursor = SDL_CreateCursor((const Uint8 *) cursor_bits, (const Uint8 *) cursor_bits, 16, 16, 0, 0);
 
         }
         else if (vm_options.display_scale == 2)
@@ -197,20 +195,23 @@ public:
                 src += 2;
             }
             
-            cursor = SDL_CreateCursor((const Uint8 *) image, (const Uint8 *) image, 32, 32, 0, 0);
+            new_cursor = SDL_CreateCursor((const Uint8 *) image, (const Uint8 *) image, 32, 32, 0, 0);
         }
-        if (!cursor)
+        if (!new_cursor)
         {
             SDL_LogError(SDL_LOG_CATEGORY_APPLICATION, "Create Cursor failed: %s", SDL_GetError());
 
         }
-        assert(cursor);
+
+        return new_cursor;
     }
     
     // Set the cursor image
     // (a 16 word form)
     void set_cursor_image(std::uint16_t *image)
     {
+        std::uint16_t cursor_bits[16];
+
         // save cursor bits in case we change scaling options.
         // SDL uses a MSB format, so swap the bytes
         for(int i = 0; i < 16; i++)
@@ -218,8 +219,17 @@ public:
             cursor_bits[i] = ((image[i] & 0xff) << 8) | (image[i] >> 8);
         }
         
-        update_cursor();
+        SDL_Cursor* old_cursor = cursor;
+
+        cursor = create_cursor((const Uint8 *) cursor_bits);
+
         SDL_SetCursor(cursor);
+
+        if (old_cursor)
+        {
+            SDL_FreeCursor(old_cursor);
+        }
+
     }
     
     // Set the mouse cursor location
@@ -792,7 +802,7 @@ public:
     int input_semaphore;
     bool quit_signalled;
     
-    std::uint16_t cursor_bits[16];
+
     bool texture_needs_update;
     int display_width, display_height;
     
