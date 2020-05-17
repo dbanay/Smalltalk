@@ -134,7 +134,7 @@ public:
         scheduled_time = msClockTime;
         if (semaphore)
         {
-            // Just just in case the time passed
+            // Just in case the time passed
             check_scheduled_semaphore();
         }
     }

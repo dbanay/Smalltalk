@@ -4195,8 +4195,8 @@ void Interpreter::sendSelector_argumentCount(int selector, int count)
     
 #if 0
 #ifdef DEBUGGING_SUPPORT
-    // Debugging aid that help me figure out why stuff
-    // wasn't working - intercept messages to Transcript and
+    // Debugging aid that helped me figure out why stuff
+    // wasn't working - intercept show: and error: messages and
     // display them
     const int showSelector = 6640; // #show:
     const int errorSelector = 282; // #error:
