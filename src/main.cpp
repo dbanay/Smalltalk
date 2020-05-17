@@ -806,8 +806,6 @@ public:
                     static SDL_Rect mouse_src_rect{0,0,16,16};
                     int mouseX, mouseY;
                     SDL_GetMouseState(&mouseX, &mouseY);
-                    assert(mouseX >= 0 && mouseX < display_width);
-                    assert(mouseY >= 0 && mouseY < display_height);
 
                     SDL_Rect dst = {mouseX, mouseY, 16*vm_options.display_scale, 16*vm_options.display_scale};
                     SDL_RenderCopy(renderer, mouse_texture, &mouse_src_rect, &dst);
@@ -875,14 +873,14 @@ public:
     SDL_Window *window;
     SDL_Renderer *renderer;
     SDL_Texture *texture;
-
+    
     
 #ifdef SOFTWARE_MOUSE_CURSOR
     SDL_Texture *mouse_texture;
 #else
-     SDL_Cursor *cursor;
+    SDL_Cursor *cursor;
 #endif
-
+    
     Interpreter interpreter;
 
     
