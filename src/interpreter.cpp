@@ -2640,7 +2640,7 @@ void Interpreter::primitivePosixFileOperation()
             }
                 break;
                 
-            case 2: // truncate page (make it the last page). A nil pages means truncate to zero bytes
+            case 2: // truncate page (make it the last page). A nil page means truncate to zero bytes
             {
                 success(memory.fetchPointer_ofObject(DescriptorIndex, file) != NilPointer);
                 success(page != NilPointer);
@@ -5224,7 +5224,6 @@ void Interpreter::primitiveNew()
 
 
 // primitiveAsObject
-/*ISSUE - see notes about primitiveAsOop*/
 void Interpreter::primitiveAsObject()
 {
    int thisReceiver;
