@@ -74,8 +74,9 @@ public:
         interpreter(this, &fileSystem),
         window(0), renderer(0), texture(0), cursor(0),
         display_width(0), display_height(0),
-        scheduled_semaphore(0), scheduled_time(0),
-        event_count(0),
+        scheduled_semaphore(0), input_semaphore(0), scheduled_time(0),
+        event_count(0), last_event_time(0),
+        quit_signalled(false), texture_needs_update(false),
         image_name(vm_options.snapshot_name)
     {
     }
