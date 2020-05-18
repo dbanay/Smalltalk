@@ -828,7 +828,7 @@ int ObjectMemory::lastPointerOf(int objectPointer)
     
     if (pointerBitOf(objectPointer) == 0)
     { // Not pointer object
-        // CompiledMethods are special in tha they are marked as haveing no pointers but actually do
+        // CompiledMethods are special in that they are marked as having no pointers but actually do
         if (classBitsOf(objectPointer) == MethodClass)
         {
             methodHeader = heapChunkOf_word(objectPointer, HeaderSize);

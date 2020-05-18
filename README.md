@@ -83,7 +83,7 @@ The interpreter `#defines`  are provided to allow the inclusion/exclusion of opt
 |  `IMPLEMENT_PRIMITIVE_SCANCHARS`     | Implement the optional  `primitiveScanCharacters` primitive                   |
 
 ### Application (main.cpp) `#defines`
-When running under Windows I ran into two problems. First, the mouse cursor wouldn't reliably change if the left mouse button was being held down (e.g. when reframing a window). The second issue was that the mouse cursor was very small on high resolution displays, even when system scaling options were set to compensate for it. For this reason, I added the option to have the app render the mouse cursor rather than the operating system. The `SOFTWARE_MOUSE_CURSOR` can be defined to do this. I set this conditionally if it's a Windows build. It works on the other platforms, but is unnecessary as they behave properly without it.
+When running under Windows I ran into two problems. First, the mouse cursor wouldn't reliably change if the left mouse button was being held down (e.g. when reframing a window). The second issue was that the mouse cursor was very small on high resolution displays, even when system scaling options were set to compensate for it. For these reasons, I added the option to have the app render the mouse cursor rather than the operating system. The `SOFTWARE_MOUSE_CURSOR` can be defined to do this. I set this conditionally if it's a Windows build. It works on the other platforms, but is unnecessary as they behave properly without it.
 
 ## Command line arguments
 
