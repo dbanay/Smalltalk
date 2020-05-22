@@ -27,6 +27,21 @@
 
 #include "bitblt.h"
 
+/* "source"
+ "initialize a table of bit masks ... p.356"
+ RightMasks <-
+     #(0    16r1 16r3 16r7 16rF
+         16r1F 16r3F 16r7F 16rFF
+         16r1FF 16r3FF 16r7FF 16rFFF
+         16r1FFF 16r3FFF 16r7FFF 16rFFFF).
+ AllOnes <- 16rFFFF
+*/
+
+static std::uint16_t RightMasks[] = {
+    0, 0x1, 0x3, 0x7, 0xF, 0x1F, 0x3F, 0x7F, 0xFF,
+    0x1FF, 0x3FF, 0x7FF, 0xFFF, 0x1FFF, 0x3FFF, 0x7FFF, 0xFFFF
+};
+
 
 // clipRange
 void BitBlt::clipRange()
