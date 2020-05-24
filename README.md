@@ -43,12 +43,9 @@ There is an xcode project you can open if you like.
 I have included the SDL 2.0.12 headers/binary so all you need to do is open the project in the windows directory and hit Run. 
 
 # Linux
-You need to install SDL 2.0.12 or later. Head over to http://libsdl.org and download the source code and unpack it. Then, follow the build instructions:
-`./configure`
-`make`
-`sudo make install`
+You need to install SDL 2.0.12 or later. You can either go to http://libsdl.org and download and build it yourself or use a package manager to install it.
 
-Then, change into the linux folder and type `make`.
+Then, cd into the linux subdirectory of this project and type `make`.
 You should then be able to do:
 
 `./Smalltalk -directory ../files`
