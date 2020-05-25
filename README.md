@@ -87,7 +87,7 @@ When running under Windows I ran into two problems. First, the mouse cursor woul
 The Smalltalk application takes a number of arguments. The only required argument is `-directory` _path_ which specifies the directory where the snapshot image can be found. Here is the complete list:
 |   Argument             |Meaning                          |Default                         |
 |---------------------|-------------------------------|-----------------------------|
-|-folder _path_         |Specifies the directory that contains the snapshot image, as well as the Smalltalk-80.sources and Smalltalk-80.changes files. Any other files in the directory will be accessible from Smalltalk-80 using the normal file/directory access methods.| **_required_**
+|-directory _path_         |Specifies the directory that contains the snapshot image, as well as the Smalltalk-80.sources and Smalltalk-80.changes files. Any other files in the directory will be accessible from Smalltalk-80 using the normal file/directory access methods.| **_required_**
 |-three          |Use the three button mapping | _two button scheme_     
 |-image          |Name of the snapshot file to use. | **snapshot**.**im**       
 |-cycles| Number of VM instructions to run per update loop            | **1800**   |
