@@ -32,7 +32,12 @@ The nice thing about building things by the book is there are books to document 
 # Building and running
 
 # OS X
-You will need to install SDL 2.0.12 or later. You can download it from http://libsdl.org. Choose the development library `.dmg` and install. Then, go into the osx folder and type `make`. You should then be able to do:
+You will need to install SDL 2.0.12 or later. You can download it from http://libsdl.org. Choose the development library `.dmg` and install. Then, go into the osx folder and type:
+ `make -f MakefileRT`
+
+If you installed  SDL2 through a package manager, or built it yourself, so your system has  `sdl-config`  in your path you can simply do:
+`make`
+You should then be able to do:
 
 `./Smalltalk -directory ../files`
 
