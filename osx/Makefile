@@ -1,8 +1,8 @@
 CC = g++ 
 CFLAGS	:= -O3 -std=c++14
 
-SDL_CFLAG := $(shell /usr/local/bin/sdl2-config --cflags)
-SDL_LFLAG := $(shell /usr/local/bin/sdl2-config --libs)
+SDL_CFLAG := $(shell sdl2-config --cflags)
+SDL_LFLAG := $(shell sdl2-config --libs)
 
 SRC := ../src
 OBJS := objmemory.o bitblt.o main.o interpreter.o
