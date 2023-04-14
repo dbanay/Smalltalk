@@ -29,6 +29,10 @@ _Note: Ctrl+Left Button can also be used as the "yellow button."_
 
 The nice thing about building things by the book is there are books to document how to use the system and how it works!
 
+## Arrow Notation
+
+Assignment in Smalltalk is made using the left-arrow which is written with `shift -`(`_`), the vertical-arrow is entered with `shift 6`(`^`).
+
 # Building and running
 
 # OS X
