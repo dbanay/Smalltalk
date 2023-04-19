@@ -1,7 +1,7 @@
 CC = g++ 
 CFLAGS	:= -O3 -std=c++14
 
-SDL_CFLAG := $(shell sdl2-config --cflags)
+SDL_CFLAG := $(shell sdl2-config --cflags | sed 's/\/SDL2//')
 SDL_LFLAG := $(shell sdl2-config --libs)
 
 SRC := ../src
